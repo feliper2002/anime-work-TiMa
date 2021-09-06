@@ -15,6 +15,7 @@ dependencies:
   flutter_mobx: ^2.0.2
   intl: ^0.17.0
   ringtone_player: ^0.1.1
+  percent_indicator: ^3.0.1
 
 dev_dependencies:
   build_runner: ^2.1.1

@@ -1,3 +1,4 @@
+import 'package:anime_work_time_management/pages/timer/widgets/timer_clock.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -5,6 +6,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: TimerClock(),
+      ),
+    );
   }
 }
