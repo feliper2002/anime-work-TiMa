@@ -8,6 +8,9 @@ abstract class _TimerControllerBase with Store {
   double? percent = .1;
 
   @observable
+  String? timerHeader = 'STUDY TIME';
+
+  @observable
   String? timeCountText;
 
   @action

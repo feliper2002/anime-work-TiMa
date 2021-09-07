@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:anime_work_time_management/pages/timer/controllers/timer_controller.dart';
+import 'package:anime_work_time_management/pages/home/controllers/timer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -22,6 +22,15 @@ class _TimerClockState extends State<TimerClock> {
     return Observer(builder: (_) {
       return Container(
         child: CircularPercentIndicator(
+          header: Container(
+            child: Text(controller.timerHeader!,
+                style: TextStyle(
+                  fontSize: 26,
+                  color: Colors.blueGrey[700],
+                  fontWeight: FontWeight.w900,
+                )),
+            margin: const EdgeInsets.symmetric(vertical: 12),
+          ),
           percent: controller.percent!,
           lineWidth: 15,
           radius: clockSize,

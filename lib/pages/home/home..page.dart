@@ -1,4 +1,6 @@
-import 'package:anime_work_time_management/pages/timer/widgets/timer_clock.dart';
+import 'dart:ui';
+
+import 'package:anime_work_time_management/pages/home/widgets/timer_clock.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,8 +9,23 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: TimerClock(),
+      body: Stack(
+        children: [
+          ImageFiltered(
+            imageFilter: ImageFilter.blur(sigmaY: 4, sigmaX: 4),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: Image.asset('assets/images/day_bg.jpg').image,
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: TimerClock(),
+          ),
+        ],
       ),
     );
   }
