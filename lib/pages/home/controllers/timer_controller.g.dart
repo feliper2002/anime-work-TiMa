@@ -24,6 +24,36 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
+  final _$typeAtom = Atom(name: '_TimerControllerBase.type');
+
+  @override
+  TimerType? get type {
+    _$typeAtom.reportRead();
+    return super.type;
+  }
+
+  @override
+  set type(TimerType? value) {
+    _$typeAtom.reportWrite(value, super.type, () {
+      super.type = value;
+    });
+  }
+
+  final _$timerHeaderAtom = Atom(name: '_TimerControllerBase.timerHeader');
+
+  @override
+  String? get timerHeader {
+    _$timerHeaderAtom.reportRead();
+    return super.timerHeader;
+  }
+
+  @override
+  set timerHeader(String? value) {
+    _$timerHeaderAtom.reportWrite(value, super.timerHeader, () {
+      super.timerHeader = value;
+    });
+  }
+
   final _$timeCountTextAtom = Atom(name: '_TimerControllerBase.timeCountText');
 
   @override
@@ -39,8 +69,45 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
+  final _$timerColorAtom = Atom(name: '_TimerControllerBase.timerColor');
+
+  @override
+  Color? get timerColor {
+    _$timerColorAtom.reportRead();
+    return super.timerColor;
+  }
+
+  @override
+  set timerColor(Color? value) {
+    _$timerColorAtom.reportWrite(value, super.timerColor, () {
+      super.timerColor = value;
+    });
+  }
+
   final _$_TimerControllerBaseActionController =
       ActionController(name: '_TimerControllerBase');
+
+  @override
+  String? getTimerHeader() {
+    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
+        name: '_TimerControllerBase.getTimerHeader');
+    try {
+      return super.getTimerHeader();
+    } finally {
+      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Color? getTimerColor(int mode) {
+    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
+        name: '_TimerControllerBase.getTimerColor');
+    try {
+      return super.getTimerColor(mode);
+    } finally {
+      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   double? calculatePercentByTimeDecrease() {
@@ -90,7 +157,10 @@ mixin _$TimerController on _TimerControllerBase, Store {
   String toString() {
     return '''
 percent: ${percent},
-timeCountText: ${timeCountText}
+type: ${type},
+timerHeader: ${timerHeader},
+timeCountText: ${timeCountText},
+timerColor: ${timerColor}
     ''';
   }
 }
