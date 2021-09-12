@@ -9,12 +9,13 @@ abstract class _HomeControllerBase with Store {
   int? mode = SwitchMode.day;
 
   @action
-  void changeSwitchMode(int? newMode) {
+  changeSwitchMode(int? newMode) {
     mode = newMode;
+    print(mode);
   }
 
-  @action
-  String? getBackgroundImage() {
+  @computed
+  String? get backgroundImage {
     if (mode == SwitchMode.day)
       return 'assets/images/day_bg.jpg';
     else

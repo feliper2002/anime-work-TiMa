@@ -9,6 +9,14 @@ part of 'timer_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TimerController on _TimerControllerBase, Store {
+  Computed<String?>? _$timerHeaderComputed;
+
+  @override
+  String? get timerHeader =>
+      (_$timerHeaderComputed ??= Computed<String?>(() => super.timerHeader,
+              name: '_TimerControllerBase.timerHeader'))
+          .value;
+
   final _$percentAtom = Atom(name: '_TimerControllerBase.percent');
 
   @override
@@ -39,21 +47,6 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
-  final _$timerHeaderAtom = Atom(name: '_TimerControllerBase.timerHeader');
-
-  @override
-  String? get timerHeader {
-    _$timerHeaderAtom.reportRead();
-    return super.timerHeader;
-  }
-
-  @override
-  set timerHeader(String? value) {
-    _$timerHeaderAtom.reportWrite(value, super.timerHeader, () {
-      super.timerHeader = value;
-    });
-  }
-
   final _$timeCountTextAtom = Atom(name: '_TimerControllerBase.timeCountText');
 
   @override
@@ -69,34 +62,8 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
-  final _$timerColorAtom = Atom(name: '_TimerControllerBase.timerColor');
-
-  @override
-  Color? get timerColor {
-    _$timerColorAtom.reportRead();
-    return super.timerColor;
-  }
-
-  @override
-  set timerColor(Color? value) {
-    _$timerColorAtom.reportWrite(value, super.timerColor, () {
-      super.timerColor = value;
-    });
-  }
-
   final _$_TimerControllerBaseActionController =
       ActionController(name: '_TimerControllerBase');
-
-  @override
-  String? getTimerHeader() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.getTimerHeader');
-    try {
-      return super.getTimerHeader();
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   Color? getTimerColor(int mode) {
@@ -158,9 +125,8 @@ mixin _$TimerController on _TimerControllerBase, Store {
     return '''
 percent: ${percent},
 type: ${type},
-timerHeader: ${timerHeader},
 timeCountText: ${timeCountText},
-timerColor: ${timerColor}
+timerHeader: ${timerHeader}
     ''';
   }
 }

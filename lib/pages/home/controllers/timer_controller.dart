@@ -14,21 +14,14 @@ abstract class _TimerControllerBase with Store {
   TimerType? type = TimerType.work;
 
   @observable
-  String? timerHeader;
-
-  @observable
   String? timeCountText;
 
-  @observable
-  Color? timerColor = AppColors.mainTimerColorLight;
-
-  @action
-  String? getTimerHeader() {
+  @computed
+  String? get timerHeader {
     if (type == TimerType.work)
-      timerHeader = 'STUDY/WORK TIME';
+      return 'STUDY/WORK TIME';
     else
-      timerHeader = 'WATCH ANIME TIME';
-    return timerHeader;
+      return 'WATCH ANIME TIME';
   }
 
   @action
