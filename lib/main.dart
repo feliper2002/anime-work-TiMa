@@ -1,4 +1,4 @@
-import 'package:anime_work_time_management/pages/home/home..page.dart';
+import 'package:anime_work_time_management/pages/home/home.page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(InitApp());

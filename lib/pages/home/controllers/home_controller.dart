@@ -6,12 +6,11 @@ class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   @observable
-  int? mode = SwitchMode.day;
+  bool? mode = SwitchMode.day;
 
   @action
-  changeSwitchMode(int? newMode) {
-    mode = newMode;
-    print(mode);
+  changeSwitchMode() {
+    mode = !mode!;
   }
 
   @computed

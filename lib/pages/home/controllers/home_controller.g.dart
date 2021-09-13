@@ -20,13 +20,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
   final _$modeAtom = Atom(name: '_HomeControllerBase.mode');
 
   @override
-  int? get mode {
+  bool? get mode {
     _$modeAtom.reportRead();
     return super.mode;
   }
 
   @override
-  set mode(int? value) {
+  set mode(bool? value) {
     _$modeAtom.reportWrite(value, super.mode, () {
       super.mode = value;
     });
@@ -36,11 +36,11 @@ mixin _$HomeController on _HomeControllerBase, Store {
       ActionController(name: '_HomeControllerBase');
 
   @override
-  dynamic changeSwitchMode(int? newMode) {
+  dynamic changeSwitchMode() {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.changeSwitchMode');
     try {
-      return super.changeSwitchMode(newMode);
+      return super.changeSwitchMode();
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }

@@ -8,6 +8,15 @@ class TimerController = _TimerControllerBase with _$TimerController;
 
 abstract class _TimerControllerBase with Store {
   @observable
+  bool? started = false;
+
+  @observable
+  int? minutes = 50;
+
+  @observable
+  int? seconds = 0;
+
+  @observable
   double? percent = .8;
 
   @observable
@@ -18,14 +27,14 @@ abstract class _TimerControllerBase with Store {
 
   @computed
   String? get timerHeader {
-    if (type == TimerType.work)
+    if (isWorking!)
       return 'STUDY/WORK TIME';
     else
       return 'WATCH ANIME TIME';
   }
 
   @action
-  Color? getTimerColor(int mode) {
+  Color? getTimerColor(bool mode) {
     if (mode == SwitchMode.day)
       return AppColors.mainTimerColorLight;
     else
@@ -36,6 +45,16 @@ abstract class _TimerControllerBase with Store {
   double? calculatePercentByTimeDecrease() {}
 
   @action
+  start() {
+    started = true;
+  }
+
+  @action
+  stop() {
+    started = false;
+  }
+
+  @action
   resetTimer() {}
 
   @action
@@ -43,4 +62,7 @@ abstract class _TimerControllerBase with Store {
 
   @action
   pauseTimer() {}
+
+  bool? get isWorking => type == TimerType.work;
+  bool? get isWatchingAnime => type == TimerType.watchAnime;
 }

@@ -7,9 +7,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class TimerClock extends StatefulWidget {
-  final int? mode;
+  final bool? mode;
 
-  TimerClock({this.mode = 0});
+  TimerClock({this.mode = false});
 
   @override
   _TimerClockState createState() => _TimerClockState();
@@ -45,7 +45,7 @@ class _TimerClockState extends State<TimerClock> {
           circularStrokeCap: CircularStrokeCap.round,
           progressColor: mainColor,
           center: Text(
-            "30:00",
+            "${controller.minutes.toString().padLeft(2, '0')}:${controller.seconds.toString().padLeft(2, '0')}",
             style: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.w700,

@@ -17,6 +17,51 @@ mixin _$TimerController on _TimerControllerBase, Store {
               name: '_TimerControllerBase.timerHeader'))
           .value;
 
+  final _$startedAtom = Atom(name: '_TimerControllerBase.started');
+
+  @override
+  bool? get started {
+    _$startedAtom.reportRead();
+    return super.started;
+  }
+
+  @override
+  set started(bool? value) {
+    _$startedAtom.reportWrite(value, super.started, () {
+      super.started = value;
+    });
+  }
+
+  final _$minutesAtom = Atom(name: '_TimerControllerBase.minutes');
+
+  @override
+  int? get minutes {
+    _$minutesAtom.reportRead();
+    return super.minutes;
+  }
+
+  @override
+  set minutes(int? value) {
+    _$minutesAtom.reportWrite(value, super.minutes, () {
+      super.minutes = value;
+    });
+  }
+
+  final _$secondsAtom = Atom(name: '_TimerControllerBase.seconds');
+
+  @override
+  int? get seconds {
+    _$secondsAtom.reportRead();
+    return super.seconds;
+  }
+
+  @override
+  set seconds(int? value) {
+    _$secondsAtom.reportWrite(value, super.seconds, () {
+      super.seconds = value;
+    });
+  }
+
   final _$percentAtom = Atom(name: '_TimerControllerBase.percent');
 
   @override
@@ -66,7 +111,7 @@ mixin _$TimerController on _TimerControllerBase, Store {
       ActionController(name: '_TimerControllerBase');
 
   @override
-  Color? getTimerColor(int mode) {
+  Color? getTimerColor(bool mode) {
     final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
         name: '_TimerControllerBase.getTimerColor');
     try {
@@ -82,6 +127,28 @@ mixin _$TimerController on _TimerControllerBase, Store {
         name: '_TimerControllerBase.calculatePercentByTimeDecrease');
     try {
       return super.calculatePercentByTimeDecrease();
+    } finally {
+      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic start() {
+    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
+        name: '_TimerControllerBase.start');
+    try {
+      return super.start();
+    } finally {
+      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic stop() {
+    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
+        name: '_TimerControllerBase.stop');
+    try {
+      return super.stop();
     } finally {
       _$_TimerControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -123,6 +190,9 @@ mixin _$TimerController on _TimerControllerBase, Store {
   @override
   String toString() {
     return '''
+started: ${started},
+minutes: ${minutes},
+seconds: ${seconds},
 percent: ${percent},
 type: ${type},
 timeCountText: ${timeCountText},

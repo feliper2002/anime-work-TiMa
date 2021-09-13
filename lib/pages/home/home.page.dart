@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:anime_work_time_management/pages/home/controllers/home_controller.dart';
+import 'package:anime_work_time_management/pages/home/widgets/custom_switch.dart';
 import 'package:anime_work_time_management/pages/home/widgets/timer_clock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,14 +44,8 @@ class HomePage extends StatelessWidget {
               top: 70,
               right: 10,
               child: GestureDetector(
-                onTap: () {
-                  controller.changeSwitchMode(1);
-                },
-                child: Container(
-                  height: 20,
-                  width: 20,
-                  color: Colors.red,
-                ),
+                onTap: controller.changeSwitchMode,
+                child: CustomSwitch(mode: controller.mode),
               ),
             );
           }),
