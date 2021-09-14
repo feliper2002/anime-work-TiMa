@@ -6,16 +6,21 @@ class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   @observable
-  bool? mode = SwitchMode.day;
+  bool? mode;
+
+  @action
+  setSwitchMode(bool? newMode) {
+    mode = newMode;
+  }
 
   @action
   changeSwitchMode() {
     mode = !mode!;
   }
 
-  @computed
-  String? get backgroundImage {
-    if (mode == SwitchMode.day)
+  @action
+  String? backgroundImage(bool? switchMode) {
+    if (switchMode == SwitchMode.day)
       return 'assets/images/day_bg.jpg';
     else
       return 'assets/images/night_bg.jpg';

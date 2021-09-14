@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:anime_work_time_management/core/app_settings.dart';
 import 'package:anime_work_time_management/pages/home/controllers/home_controller.dart';
 import 'package:anime_work_time_management/pages/home/widgets/custom_switch.dart';
 import 'package:anime_work_time_management/pages/home/widgets/timer_clock.dart';
@@ -9,8 +10,23 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'widgets/actions_controller.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final controller = HomeController();
+  final settings = SettingsController();
+
+  Map<String, dynamic>? timer;
+
+  @override
+  void initState() {
+    timer = settings.timer;
+    controller.setSwitchMode(settings.switchMode);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +42,9 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: Image.asset(controller.backgroundImage!).image,
+                    image: Image.asset(
+                            controller.backgroundImage(settings.switchMode)!)
+                        .image,
                   ),
                 ),
               );
@@ -35,7 +53,7 @@ class HomePage extends StatelessWidget {
           Center(
             child: Observer(builder: (_) {
               return TimerClock(
-                mode: controller.mode,
+                mode: settings.switchMode,
               );
             }),
           ),
@@ -44,13 +62,16 @@ class HomePage extends StatelessWidget {
               top: 70,
               right: 10,
               child: GestureDetector(
-                onTap: controller.changeSwitchMode,
-                child: CustomSwitch(mode: controller.mode),
+                onTap: () async {
+                  controller.changeSwitchMode();
+                  await settings.setSwitchMode(controller.mode!);
+                },
+                child: CustomSwitch(mode: settings.switchMode),
               ),
             );
           }),
           Observer(builder: (_) {
-            return ActionsController(size: size, mode: controller.mode);
+            return ActionsController(size: size, mode: settings.switchMode);
           }),
         ],
       ),
