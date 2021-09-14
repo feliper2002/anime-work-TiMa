@@ -5,19 +5,6 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  @observable
-  bool? mode;
-
-  @action
-  setSwitchMode(bool? newMode) {
-    mode = newMode;
-  }
-
-  @action
-  changeSwitchMode() {
-    mode = !mode!;
-  }
-
   @action
   String? backgroundImage(bool? switchMode) {
     if (switchMode == SwitchMode.day)

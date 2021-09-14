@@ -24,14 +24,12 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     timer = settings.timer;
-    controller.setSwitchMode(settings.switchMode);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -63,8 +61,7 @@ class _HomePageState extends State<HomePage> {
               right: 10,
               child: GestureDetector(
                 onTap: () async {
-                  controller.changeSwitchMode();
-                  await settings.setSwitchMode(controller.mode!);
+                  await settings.setSwitchMode();
                 },
                 child: CustomSwitch(mode: settings.switchMode),
               ),

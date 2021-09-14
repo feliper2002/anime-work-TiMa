@@ -4,9 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobx/mobx.dart';
 part 'app_settings.g.dart';
 
-class SettingsController = SettingsControllerBase with _$SettingsController;
+class SettingsController = _SettingsControllerBase with _$SettingsController;
 
-abstract class SettingsControllerBase with Store {
+abstract class _SettingsControllerBase with Store {
   @observable
   Map<String, dynamic> timer = {
     'studyMinutes': 50,
@@ -16,7 +16,7 @@ abstract class SettingsControllerBase with Store {
     'mode': SwitchMode.day,
   };
 
-  SettingsControllerBase() {
+  _SettingsControllerBase() {
     _startSettings();
   }
 
@@ -45,9 +45,10 @@ abstract class SettingsControllerBase with Store {
   }
 
   @action
-  setSwitchMode(bool? mode) async {
+  setSwitchMode() async {
     final _preferences = await SharedPreferences.getInstance();
-    await _preferences.setBool('mode', mode!);
+    timer['mode'] = !timer['mode'];
+    await _preferences.setBool('mode', timer['mode']);
     await _readPreferences();
   }
 

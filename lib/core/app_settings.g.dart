@@ -8,16 +8,16 @@ part of 'app_settings.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$SettingsController on SettingsControllerBase, Store {
+mixin _$SettingsController on _SettingsControllerBase, Store {
   Computed<bool?>? _$switchModeComputed;
 
   @override
   bool? get switchMode =>
       (_$switchModeComputed ??= Computed<bool?>(() => super.switchMode,
-              name: 'SettingsControllerBase.switchMode'))
+              name: '_SettingsControllerBase.switchMode'))
           .value;
 
-  final _$timerAtom = Atom(name: 'SettingsControllerBase.timer');
+  final _$timerAtom = Atom(name: '_SettingsControllerBase.timer');
 
   @override
   Map<String, dynamic> get timer {
@@ -33,7 +33,7 @@ mixin _$SettingsController on SettingsControllerBase, Store {
   }
 
   final _$_readPreferencesAsyncAction =
-      AsyncAction('SettingsControllerBase._readPreferences');
+      AsyncAction('_SettingsControllerBase._readPreferences');
 
   @override
   Future _readPreferences() {
@@ -41,15 +41,15 @@ mixin _$SettingsController on SettingsControllerBase, Store {
   }
 
   final _$setSwitchModeAsyncAction =
-      AsyncAction('SettingsControllerBase.setSwitchMode');
+      AsyncAction('_SettingsControllerBase.setSwitchMode');
 
   @override
-  Future setSwitchMode(bool? mode) {
-    return _$setSwitchModeAsyncAction.run(() => super.setSwitchMode(mode));
+  Future setSwitchMode() {
+    return _$setSwitchModeAsyncAction.run(() => super.setSwitchMode());
   }
 
   final _$setWatchAnimePrefsAsyncAction =
-      AsyncAction('SettingsControllerBase.setWatchAnimePrefs');
+      AsyncAction('_SettingsControllerBase.setWatchAnimePrefs');
 
   @override
   Future setWatchAnimePrefs(int minutes, int seconds) {
@@ -58,7 +58,7 @@ mixin _$SettingsController on SettingsControllerBase, Store {
   }
 
   final _$setWorkStudyPrefsAsyncAction =
-      AsyncAction('SettingsControllerBase.setWorkStudyPrefs');
+      AsyncAction('_SettingsControllerBase.setWorkStudyPrefs');
 
   @override
   Future setWorkStudyPrefs(int minutes, int seconds) {
