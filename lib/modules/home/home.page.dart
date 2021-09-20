@@ -68,6 +68,17 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           }),
+          Positioned(
+            top: 70,
+            left: 20,
+            child: Row(
+              children: [
+                Icon(Icons.info_outline, color: Colors.white),
+                SizedBox(width: 22),
+                Icon(Icons.settings, color: Colors.white),
+              ],
+            ),
+          ),
           Observer(builder: (_) {
             return ActionsController(size: size, mode: settings.switchMode);
           }),

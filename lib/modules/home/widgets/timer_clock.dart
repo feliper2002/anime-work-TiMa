@@ -22,6 +22,12 @@ class _TimerClockState extends State<TimerClock> {
   final end = 2 * pi;
 
   @override
+  void initState() {
+    controller.getStartTimerValues();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final clockSize = 300.toDouble();
     return Observer(builder: (_) {

@@ -8,8 +8,10 @@ class ActionButton extends StatelessWidget {
   final bool? mode;
   final Function? onClick;
   final IconData? customIcon;
+  final bool? enable;
 
-  ActionButton(this.size, this.mode, {this.onClick, this.customIcon});
+  ActionButton(this.size, this.mode,
+      {this.onClick, this.customIcon, this.enable = true});
 
   final controller = Modular.get<TimerController>();
 
@@ -20,31 +22,34 @@ class ActionButton extends StatelessWidget {
     final buttonSize = size!.width * .16;
 
     return Observer(builder: (_) {
-      return GestureDetector(
-        onTap: onClick == null
-            ? () {
-                if (!controller.started!) {
-                  controller.start();
-                } else {
-                  controller.stop();
+      return Visibility(
+        visible: enable!,
+        child: GestureDetector(
+          onTap: onClick == null
+              ? () {
+                  if (!controller.started!) {
+                    controller.start();
+                  } else {
+                    controller.stop();
+                  }
                 }
-              }
-            : onClick as void Function(),
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 6),
-          height: buttonSize,
-          width: buttonSize,
-          padding: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: mode!
-                ? Colors.grey[200]!.withOpacity(.2)
-                : Colors.blue[900]!.withOpacity(.2),
-            border: Border.all(color: _color!, width: 2),
+              : onClick as void Function(),
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 6),
+            height: buttonSize,
+            width: buttonSize,
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              color: mode!
+                  ? Colors.grey[200]!.withOpacity(.2)
+                  : Colors.blue[900]!.withOpacity(.2),
+              border: Border.all(color: _color!, width: 2),
+            ),
+            child: customIcon == null
+                ? Icon(controller.started! ? Icons.pause : Icons.play_arrow,
+                    color: _color)
+                : Icon(customIcon, color: _color),
           ),
-          child: customIcon == null
-              ? Icon(controller.started! ? Icons.pause : Icons.play_arrow,
-                  color: _color)
-              : Icon(customIcon, color: _color),
         ),
       );
     });

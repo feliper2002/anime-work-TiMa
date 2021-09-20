@@ -153,6 +153,36 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
+  final _$timeAtom = Atom(name: '_TimerControllerBase.time');
+
+  @override
+  int? get time {
+    _$timeAtom.reportRead();
+    return super.time;
+  }
+
+  @override
+  set time(int? value) {
+    _$timeAtom.reportWrite(value, super.time, () {
+      super.time = value;
+    });
+  }
+
+  final _$secInPercentAtom = Atom(name: '_TimerControllerBase.secInPercent');
+
+  @override
+  double? get secInPercent {
+    _$secInPercentAtom.reportRead();
+    return super.secInPercent;
+  }
+
+  @override
+  set secInPercent(double? value) {
+    _$secInPercentAtom.reportWrite(value, super.secInPercent, () {
+      super.secInPercent = value;
+    });
+  }
+
   final _$_TimerControllerBaseActionController =
       ActionController(name: '_TimerControllerBase');
 
@@ -168,22 +198,22 @@ mixin _$TimerController on _TimerControllerBase, Store {
   }
 
   @override
-  double? calculatePercentByTimeDecrease() {
+  dynamic start() {
     final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.calculatePercentByTimeDecrease');
+        name: '_TimerControllerBase.start');
     try {
-      return super.calculatePercentByTimeDecrease();
+      return super.start();
     } finally {
       _$_TimerControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic start() {
+  dynamic getStartTimerValues() {
     final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.start');
+        name: '_TimerControllerBase.getStartTimerValues');
     try {
-      return super.start();
+      return super.getStartTimerValues();
     } finally {
       _$_TimerControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -256,6 +286,8 @@ percent: ${percent},
 type: ${type},
 timeCountText: ${timeCountText},
 timer: ${timer},
+time: ${time},
+secInPercent: ${secInPercent},
 timerHeader: ${timerHeader}
     ''';
   }

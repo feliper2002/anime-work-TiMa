@@ -36,6 +36,7 @@ class ActionsController extends StatelessWidget {
                     mode,
                     customIcon: Icons.replay_outlined,
                     onClick: controller.restart,
+                    enable: !controller.started!,
                   );
                 }),
               ],

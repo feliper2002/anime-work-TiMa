@@ -25,7 +25,7 @@ abstract class _TimerControllerBase with Store {
   int? timeWatchAnime = 25;
 
   @observable
-  double? percent = .8;
+  double? percent = 0;
 
   @observable
   TimerType? type = TimerType.work;
@@ -52,27 +52,36 @@ abstract class _TimerControllerBase with Store {
       return AppColors.mainTimerColorDark;
   }
 
-  @action
-  double? calculatePercentByTimeDecrease() {
-    return ((minutes! * 60) + seconds!).toDouble();
-  }
-
   setStarted(bool? value) {
     started = value;
   }
+
+  @observable
+  int? time;
+
+  @observable
+  double? secInPercent;
 
   @action
   start() {
     started = true;
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      time = minutes! * 60 - seconds!;
+      secInPercent = (time! / 100);
+      if (time! > 0) {
+        time = time! - 1;
+      }
       if (minutes == 0 && seconds == 0) {
         _changeTimerType();
+        percent = 0;
       } else if (seconds == 0) {
         seconds = 59;
         minutes = minutes! - 1;
       } else {
+        percent = percent! + ((60 / time!) / 60);
         seconds = seconds! - 1;
       }
+      print(percent);
     });
   }
 
@@ -87,6 +96,14 @@ abstract class _TimerControllerBase with Store {
   }
 
   @action
+  getStartTimerValues() {
+    if (type == TimerType.work) {
+      minutes = timeWork;
+    } else
+      minutes = timeWatchAnime;
+  }
+
+  @action
   stop() {
     started = false;
     timer?.cancel();
@@ -94,6 +111,7 @@ abstract class _TimerControllerBase with Store {
 
   @action
   restart() {
+    percent = 0;
     stop();
     if (isWorking!) {
       minutes = timeWork;
