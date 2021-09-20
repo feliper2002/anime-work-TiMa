@@ -6,3 +6,5 @@ abstract class SwitchMode {
 enum State { loading, error, sucess, stop }
 
 enum TimerType { work, watchAnime }
+
+enum ButtonMode { start, pause, stop, restart }

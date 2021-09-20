@@ -62,6 +62,37 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
+  final _$timeWorkAtom = Atom(name: '_TimerControllerBase.timeWork');
+
+  @override
+  int? get timeWork {
+    _$timeWorkAtom.reportRead();
+    return super.timeWork;
+  }
+
+  @override
+  set timeWork(int? value) {
+    _$timeWorkAtom.reportWrite(value, super.timeWork, () {
+      super.timeWork = value;
+    });
+  }
+
+  final _$timeWatchAnimeAtom =
+      Atom(name: '_TimerControllerBase.timeWatchAnime');
+
+  @override
+  int? get timeWatchAnime {
+    _$timeWatchAnimeAtom.reportRead();
+    return super.timeWatchAnime;
+  }
+
+  @override
+  set timeWatchAnime(int? value) {
+    _$timeWatchAnimeAtom.reportWrite(value, super.timeWatchAnime, () {
+      super.timeWatchAnime = value;
+    });
+  }
+
   final _$percentAtom = Atom(name: '_TimerControllerBase.percent');
 
   @override
@@ -104,6 +135,21 @@ mixin _$TimerController on _TimerControllerBase, Store {
   set timeCountText(String? value) {
     _$timeCountTextAtom.reportWrite(value, super.timeCountText, () {
       super.timeCountText = value;
+    });
+  }
+
+  final _$timerAtom = Atom(name: '_TimerControllerBase.timer');
+
+  @override
+  Timer? get timer {
+    _$timerAtom.reportRead();
+    return super.timer;
+  }
+
+  @override
+  set timer(Timer? value) {
+    _$timerAtom.reportWrite(value, super.timer, () {
+      super.timer = value;
     });
   }
 
@@ -155,6 +201,17 @@ mixin _$TimerController on _TimerControllerBase, Store {
   }
 
   @override
+  dynamic restart() {
+    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
+        name: '_TimerControllerBase.restart');
+    try {
+      return super.restart();
+    } finally {
+      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic resetTimer() {
     final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
         name: '_TimerControllerBase.resetTimer');
@@ -193,9 +250,12 @@ mixin _$TimerController on _TimerControllerBase, Store {
 started: ${started},
 minutes: ${minutes},
 seconds: ${seconds},
+timeWork: ${timeWork},
+timeWatchAnime: ${timeWatchAnime},
 percent: ${percent},
 type: ${type},
 timeCountText: ${timeCountText},
+timer: ${timer},
 timerHeader: ${timerHeader}
     ''';
   }

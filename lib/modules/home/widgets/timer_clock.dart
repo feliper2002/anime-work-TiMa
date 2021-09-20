@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import 'package:anime_work_time_management/pages/home/controllers/timer_controller.dart';
+import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -16,7 +17,7 @@ class TimerClock extends StatefulWidget {
 }
 
 class _TimerClockState extends State<TimerClock> {
-  final controller = TimerController();
+  final controller = Modular.get<TimerController>();
   final start = 0.toDouble();
   final end = 2 * pi;
 
@@ -44,14 +45,16 @@ class _TimerClockState extends State<TimerClock> {
           animateFromLastPercent: true,
           circularStrokeCap: CircularStrokeCap.round,
           progressColor: mainColor,
-          center: Text(
-            "${controller.minutes.toString().padLeft(2, '0')}:${controller.seconds.toString().padLeft(2, '0')}",
-            style: TextStyle(
-              fontSize: 48,
-              fontWeight: FontWeight.w700,
-              color: mainColor,
-            ),
-          ),
+          center: Observer(builder: (_) {
+            return Text(
+              "${controller.minutes!.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
+              style: TextStyle(
+                fontSize: 48,
+                fontWeight: FontWeight.w700,
+                color: mainColor,
+              ),
+            );
+          }),
         ),
       );
     });
