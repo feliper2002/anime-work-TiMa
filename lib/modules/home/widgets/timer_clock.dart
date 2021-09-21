@@ -32,36 +32,33 @@ class _TimerClockState extends State<TimerClock> {
     final clockSize = 300.toDouble();
     return Observer(builder: (_) {
       final mainColor = controller.getTimerColor(widget.mode!);
-      return Container(
-        child: CircularPercentIndicator(
-          header: Container(
-            child: Text(controller.timerHeader!,
-                style: TextStyle(
-                  fontSize: 26,
-                  color: mainColor,
-                  fontWeight: FontWeight.w900,
-                )),
-            margin: const EdgeInsets.symmetric(vertical: 12),
-          ),
-          percent: controller.percent!,
-          lineWidth: 15,
-          radius: clockSize,
-          arcType: ArcType.FULL,
-          animation: true,
-          animateFromLastPercent: true,
-          circularStrokeCap: CircularStrokeCap.round,
-          progressColor: mainColor,
-          center: Observer(builder: (_) {
-            return Text(
-              "${controller.minutes!.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
+      return CircularPercentIndicator(
+        header: Container(
+          child: Text(controller.timerHeader!,
               style: TextStyle(
-                fontSize: 48,
-                fontWeight: FontWeight.w700,
+                fontSize: 26,
                 color: mainColor,
-              ),
-            );
-          }),
+                fontWeight: FontWeight.w900,
+              )),
+          margin: const EdgeInsets.symmetric(vertical: 12),
         ),
+        percent: controller.percent!,
+        lineWidth: 15,
+        radius: clockSize,
+        animation: true,
+        animateFromLastPercent: true,
+        circularStrokeCap: CircularStrokeCap.round,
+        progressColor: mainColor,
+        center: Observer(builder: (_) {
+          return Text(
+            "${controller.minutes!.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
+            style: TextStyle(
+              fontSize: 48,
+              fontWeight: FontWeight.w700,
+              color: mainColor,
+            ),
+          );
+        }),
       );
     });
   }

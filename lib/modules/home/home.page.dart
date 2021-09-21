@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:anime_work_time_management/core/app_settings.dart';
+import 'package:anime_work_time_management/modules/home/widgets/app_actions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -68,17 +69,9 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           }),
-          Positioned(
-            top: 70,
-            left: 20,
-            child: Row(
-              children: [
-                Icon(Icons.info_outline, color: Colors.white),
-                SizedBox(width: 22),
-                Icon(Icons.settings, color: Colors.white),
-              ],
-            ),
-          ),
+          Observer(builder: (_) {
+            return AppActions(settings.switchMode);
+          }),
           Observer(builder: (_) {
             return ActionsController(size: size, mode: settings.switchMode);
           }),

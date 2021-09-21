@@ -242,39 +242,6 @@ mixin _$TimerController on _TimerControllerBase, Store {
   }
 
   @override
-  dynamic resetTimer() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.resetTimer');
-    try {
-      return super.resetTimer();
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic incrementPercent() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.incrementPercent');
-    try {
-      return super.incrementPercent();
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic pauseTimer() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.pauseTimer');
-    try {
-      return super.pauseTimer();
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 started: ${started},

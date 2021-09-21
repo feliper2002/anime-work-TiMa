@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:anime_work_time_management/core/app_settings.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 part 'timer_controller.g.dart';
 
@@ -13,16 +15,16 @@ abstract class _TimerControllerBase with Store {
   bool? started = false;
 
   @observable
-  int? minutes = 50;
+  int? minutes;
 
   @observable
   int? seconds = 0;
 
   @observable
-  int? timeWork = 50;
+  int? timeWork;
 
   @observable
-  int? timeWatchAnime = 25;
+  int? timeWatchAnime;
 
   @observable
   double? percent = 0;
@@ -78,7 +80,9 @@ abstract class _TimerControllerBase with Store {
         seconds = 59;
         minutes = minutes! - 1;
       } else {
-        percent = percent! + ((60 / time!) / 60);
+        if (percent! < 1) {
+          percent = percent! + ((60 / time!) / 60);
+        }
         seconds = seconds! - 1;
       }
       print(percent);
@@ -88,19 +92,19 @@ abstract class _TimerControllerBase with Store {
   _changeTimerType() {
     if (isWorking!) {
       type = TimerType.watchAnime;
-      minutes = timeWatchAnime;
+      minutes = settings.timer['animeMinutes'];
     } else {
       type = TimerType.work;
-      minutes = timeWork;
+      minutes = settings.timer['studyMinutes'];
     }
   }
 
   @action
   getStartTimerValues() {
     if (type == TimerType.work) {
-      minutes = timeWork;
+      minutes = settings.timer['studyMinutes'];
     } else
-      minutes = timeWatchAnime;
+      minutes = settings.timer['animeMinutes'];
   }
 
   @action
@@ -109,27 +113,20 @@ abstract class _TimerControllerBase with Store {
     timer?.cancel();
   }
 
+  final settings = Modular.get<SettingsController>();
+
   @action
   restart() {
     percent = 0;
     stop();
     if (isWorking!) {
-      minutes = timeWork;
+      minutes = settings.timer['studyMinutes'];
       seconds = 0;
     } else {
-      minutes = timeWatchAnime;
+      minutes = settings.timer['animeMinutes'];
       seconds = 0;
     }
   }
-
-  @action
-  resetTimer() {}
-
-  @action
-  incrementPercent() {}
-
-  @action
-  pauseTimer() {}
 
   bool? get isWorking => type == TimerType.work;
   bool? get isWatchingAnime => type == TimerType.watchAnime;
