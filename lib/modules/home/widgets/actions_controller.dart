@@ -17,32 +17,57 @@ class ActionsController extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Container(
-        height: size!.height * .23,
-        decoration: BoxDecoration(
-          color: controller.getTimerColor(mode!),
-          borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
+      child: Stack(
+        children: [
+          Container(
+            height: size!.height * .23,
+            decoration: BoxDecoration(
+              color: controller.getTimerColor(mode!),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
+            ),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ActionButton(size, mode),
-                Observer(builder: (_) {
-                  return ActionButton(
-                    size,
-                    mode,
-                    customIcon: Icons.replay_outlined,
-                    onClick: controller.restart,
-                    enable: !controller.started!,
-                  );
-                }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ActionButton(size, mode),
+                    Observer(builder: (_) {
+                      return ActionButton(
+                        size,
+                        mode,
+                        customIcon: Icons.replay_outlined,
+                        onClick: controller.restart,
+                        enable: !controller.started!,
+                      );
+                    }),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+          Positioned(
+            top: 8,
+            right: 10,
+            child: IconButton(
+              padding: const EdgeInsets.all(4),
+              icon: Container(
+                alignment: Alignment.center,
+                child:
+                    Icon(Icons.timer, color: controller.getTimerColor(!mode!)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    width: 1.8,
+                    color: controller.getTimerColor(!mode!)!,
+                  ),
+                ),
+              ),
+              iconSize: 28,
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
     );
   }

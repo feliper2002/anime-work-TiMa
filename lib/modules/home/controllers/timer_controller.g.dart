@@ -96,13 +96,13 @@ mixin _$TimerController on _TimerControllerBase, Store {
   final _$percentAtom = Atom(name: '_TimerControllerBase.percent');
 
   @override
-  double? get percent {
+  double get percent {
     _$percentAtom.reportRead();
     return super.percent;
   }
 
   @override
-  set percent(double? value) {
+  set percent(double value) {
     _$percentAtom.reportWrite(value, super.percent, () {
       super.percent = value;
     });

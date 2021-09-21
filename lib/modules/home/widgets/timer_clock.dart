@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
+import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -42,13 +43,14 @@ class _TimerClockState extends State<TimerClock> {
               )),
           margin: const EdgeInsets.symmetric(vertical: 12),
         ),
-        percent: controller.percent!,
+        percent: controller.percent,
         lineWidth: 15,
         radius: clockSize,
         animation: true,
         animateFromLastPercent: true,
         circularStrokeCap: CircularStrokeCap.round,
         progressColor: mainColor,
+        backgroundColor: AppColors.timerProgressBg,
         center: Observer(builder: (_) {
           return Text(
             "${controller.minutes!.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",

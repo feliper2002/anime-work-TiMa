@@ -6,7 +6,7 @@ class AppColors {
   static Color get mainTimerColorLight => Color(0xff001767);
   static Color get mainTimerColorDark => Colors.white;
 
-  static List<Color> get timerGradient => [Colors.blue, Colors.blueGrey];
+  static Color get timerProgressBg => Color(0xff9AB7FF);
 
   static List<Color> get daySwitchBg => [Color(0xffFAFF00), Color(0xffEDB900)];
   static List<Color> get nightSwitchBg =>

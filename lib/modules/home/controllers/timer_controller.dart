@@ -27,7 +27,7 @@ abstract class _TimerControllerBase with Store {
   int? timeWatchAnime;
 
   @observable
-  double? percent = 0;
+  double percent = 0;
 
   @observable
   TimerType? type = TimerType.work;
@@ -80,8 +80,8 @@ abstract class _TimerControllerBase with Store {
         seconds = 59;
         minutes = minutes! - 1;
       } else {
-        if (percent! < 1) {
-          percent = percent! + ((60 / time!) / 60);
+        if (percent < 1) {
+          percent += ((55 / time!) / 60);
         }
         seconds = seconds! - 1;
       }
@@ -101,6 +101,7 @@ abstract class _TimerControllerBase with Store {
 
   @action
   getStartTimerValues() {
+    percent = 0;
     if (type == TimerType.work) {
       minutes = settings.timer['studyMinutes'];
     } else
