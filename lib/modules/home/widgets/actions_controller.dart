@@ -1,4 +1,5 @@
 import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
+import 'package:anime_work_time_management/shared/functions/show_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -64,7 +65,28 @@ class ActionsController extends StatelessWidget {
                 ),
               ),
               iconSize: 28,
-              onPressed: () {},
+              onPressed: () async {
+                await showCustomDialog(
+                  context,
+                  isDismissible: true,
+                  dialog: Container(
+                    color: controller.getTimerColor(mode!),
+                    padding: const EdgeInsets.only(
+                        top: 17, bottom: 25, left: 14, right: 14),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Editar tempo de duração',
+                          style: TextStyle(
+                            color: controller.getTimerColor(!mode!),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
