@@ -1,14 +1,14 @@
 import 'dart:ui';
 
 import 'package:anime_work_time_management/core/app_settings.dart';
-import 'package:anime_work_time_management/modules/home/widgets/app_actions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'controllers/home_controller.dart';
+import '../controllers/home_controller.dart';
 import 'widgets/actions_controller.dart';
+import 'widgets/app_actions.dart';
 import 'widgets/custom_switch.dart';
 import 'widgets/timer_clock.dart';
 
@@ -17,8 +17,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final controller = Modular.get<HomeController>();
+class _HomePageState extends ModularState<HomePage, HomeController> {
   final settings = Modular.get<SettingsController>();
 
   Map<String, dynamic>? timer;

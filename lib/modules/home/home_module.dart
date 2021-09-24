@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'home.page.dart';
+import 'presenter/home.page.dart';
 
 class HomeModule extends Module {
   @override
