@@ -62,16 +62,47 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
+  final _$timeWorkAtom = Atom(name: '_TimerControllerBase.timeWork');
+
+  @override
+  int? get timeWork {
+    _$timeWorkAtom.reportRead();
+    return super.timeWork;
+  }
+
+  @override
+  set timeWork(int? value) {
+    _$timeWorkAtom.reportWrite(value, super.timeWork, () {
+      super.timeWork = value;
+    });
+  }
+
+  final _$timeWatchAnimeAtom =
+      Atom(name: '_TimerControllerBase.timeWatchAnime');
+
+  @override
+  int? get timeWatchAnime {
+    _$timeWatchAnimeAtom.reportRead();
+    return super.timeWatchAnime;
+  }
+
+  @override
+  set timeWatchAnime(int? value) {
+    _$timeWatchAnimeAtom.reportWrite(value, super.timeWatchAnime, () {
+      super.timeWatchAnime = value;
+    });
+  }
+
   final _$percentAtom = Atom(name: '_TimerControllerBase.percent');
 
   @override
-  double? get percent {
+  double get percent {
     _$percentAtom.reportRead();
     return super.percent;
   }
 
   @override
-  set percent(double? value) {
+  set percent(double value) {
     _$percentAtom.reportWrite(value, super.percent, () {
       super.percent = value;
     });
@@ -107,6 +138,51 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
+  final _$timerAtom = Atom(name: '_TimerControllerBase.timer');
+
+  @override
+  Timer? get timer {
+    _$timerAtom.reportRead();
+    return super.timer;
+  }
+
+  @override
+  set timer(Timer? value) {
+    _$timerAtom.reportWrite(value, super.timer, () {
+      super.timer = value;
+    });
+  }
+
+  final _$timeAtom = Atom(name: '_TimerControllerBase.time');
+
+  @override
+  int? get time {
+    _$timeAtom.reportRead();
+    return super.time;
+  }
+
+  @override
+  set time(int? value) {
+    _$timeAtom.reportWrite(value, super.time, () {
+      super.time = value;
+    });
+  }
+
+  final _$secInPercentAtom = Atom(name: '_TimerControllerBase.secInPercent');
+
+  @override
+  double? get secInPercent {
+    _$secInPercentAtom.reportRead();
+    return super.secInPercent;
+  }
+
+  @override
+  set secInPercent(double? value) {
+    _$secInPercentAtom.reportWrite(value, super.secInPercent, () {
+      super.secInPercent = value;
+    });
+  }
+
   final _$_TimerControllerBaseActionController =
       ActionController(name: '_TimerControllerBase');
 
@@ -116,17 +192,6 @@ mixin _$TimerController on _TimerControllerBase, Store {
         name: '_TimerControllerBase.getTimerColor');
     try {
       return super.getTimerColor(mode);
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  double? calculatePercentByTimeDecrease() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.calculatePercentByTimeDecrease');
-    try {
-      return super.calculatePercentByTimeDecrease();
     } finally {
       _$_TimerControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -144,6 +209,17 @@ mixin _$TimerController on _TimerControllerBase, Store {
   }
 
   @override
+  dynamic getStartTimerValues() {
+    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
+        name: '_TimerControllerBase.getStartTimerValues');
+    try {
+      return super.getStartTimerValues();
+    } finally {
+      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic stop() {
     final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
         name: '_TimerControllerBase.stop');
@@ -155,33 +231,11 @@ mixin _$TimerController on _TimerControllerBase, Store {
   }
 
   @override
-  dynamic resetTimer() {
+  dynamic restart() {
     final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.resetTimer');
+        name: '_TimerControllerBase.restart');
     try {
-      return super.resetTimer();
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic incrementPercent() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.incrementPercent');
-    try {
-      return super.incrementPercent();
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic pauseTimer() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.pauseTimer');
-    try {
-      return super.pauseTimer();
+      return super.restart();
     } finally {
       _$_TimerControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -193,9 +247,14 @@ mixin _$TimerController on _TimerControllerBase, Store {
 started: ${started},
 minutes: ${minutes},
 seconds: ${seconds},
+timeWork: ${timeWork},
+timeWatchAnime: ${timeWatchAnime},
 percent: ${percent},
 type: ${type},
 timeCountText: ${timeCountText},
+timer: ${timer},
+time: ${time},
+secInPercent: ${secInPercent},
 timerHeader: ${timerHeader}
     ''';
   }

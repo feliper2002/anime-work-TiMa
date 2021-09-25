@@ -1,23 +1,24 @@
 import 'dart:ui';
 
 import 'package:anime_work_time_management/core/app_settings.dart';
-import 'package:anime_work_time_management/pages/home/controllers/home_controller.dart';
-import 'package:anime_work_time_management/pages/home/widgets/custom_switch.dart';
-import 'package:anime_work_time_management/pages/home/widgets/timer_clock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
+import '../controllers/home_controller.dart';
 import 'widgets/actions_controller.dart';
+import 'widgets/app_actions.dart';
+import 'widgets/custom_switch.dart';
+import 'widgets/timer_clock.dart';
 
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final controller = HomeController();
-  final settings = SettingsController();
+class _HomePageState extends ModularState<HomePage, HomeController> {
+  final settings = Modular.get<SettingsController>();
 
   Map<String, dynamic>? timer;
 
@@ -66,6 +67,9 @@ class _HomePageState extends State<HomePage> {
                 child: CustomSwitch(mode: settings.switchMode),
               ),
             );
+          }),
+          Observer(builder: (_) {
+            return AppActions(settings.switchMode);
           }),
           Observer(builder: (_) {
             return ActionsController(size: size, mode: settings.switchMode);
