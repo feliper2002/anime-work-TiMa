@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_mobx: ^2.0.2
+  flutter_modular: ^4.0.1
   intl: ^0.17.0
   percent_indicator: ^3.0.1
   ringtone_player: ^0.1.1

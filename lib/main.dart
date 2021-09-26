@@ -1,20 +1,7 @@
-import 'package:anime_work_time_management/pages/home/home.page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-void main() => runApp(InitApp());
+import 'core/app/app_module.dart';
+import 'core/app/app_widget.dart';
 
-class InitApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Anime-Work TiMa',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomePage(),
-        '/timer': (context) => Container(),
-        '/info': (context) => Container(),
-      },
-    );
-  }
-}
+void main() => runApp(ModularApp(module: AppModule(), child: AppWidget()));

@@ -52,18 +52,18 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
       AsyncAction('_SettingsControllerBase.setWatchAnimePrefs');
 
   @override
-  Future setWatchAnimePrefs(int minutes, int seconds) {
+  Future setWatchAnimePrefs(int minutes) {
     return _$setWatchAnimePrefsAsyncAction
-        .run(() => super.setWatchAnimePrefs(minutes, seconds));
+        .run(() => super.setWatchAnimePrefs(minutes));
   }
 
   final _$setWorkStudyPrefsAsyncAction =
       AsyncAction('_SettingsControllerBase.setWorkStudyPrefs');
 
   @override
-  Future setWorkStudyPrefs(int minutes, int seconds) {
+  Future setWorkStudyPrefs(int minutes) {
     return _$setWorkStudyPrefsAsyncAction
-        .run(() => super.setWorkStudyPrefs(minutes, seconds));
+        .run(() => super.setWorkStudyPrefs(minutes));
   }
 
   @override
