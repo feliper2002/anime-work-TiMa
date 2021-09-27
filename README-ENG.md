@@ -1,5 +1,7 @@
 # Anime-Work: TiMA
 
+[README - Versão PT-BR](README.md)
+
 A `Time Management` project made with Flutter 💙
 
 ## About
