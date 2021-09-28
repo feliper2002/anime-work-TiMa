@@ -38,13 +38,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
             height: size,
             width: size,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: !widget.mode!
-                    ? AppColors.daySwitchSnap
-                    : AppColors.nightSwitchSnap,
-              ),
+              color: Colors.white,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -53,6 +47,12 @@ class _CustomSwitchState extends State<CustomSwitch> {
                   blurRadius: .6,
                 ),
               ],
+            ),
+            child: Icon(
+              widget.mode! ? Icons.wb_sunny : Icons.nightlight,
+              color: (widget.mode!
+                  ? AppColors.switchSunColor
+                  : AppColors.switchMoonColor),
             ),
           ),
         ),

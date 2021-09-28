@@ -1,10 +1,12 @@
 import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
 import 'package:anime_work_time_management/shared/functions/show_dialog.dart';
+import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'action_button.dart';
+import 'timer_type_dialog.dart';
 
 class ActionsController extends StatelessWidget {
   final Size? size;
@@ -54,13 +56,17 @@ class ActionsController extends StatelessWidget {
               padding: const EdgeInsets.all(4),
               icon: Container(
                 alignment: Alignment.center,
-                child:
-                    Icon(Icons.timer, color: controller.getTimerColor(!mode!)),
+                child: Icon(Icons.timer,
+                    color: mode!
+                        ? AppColors.actionButtonColorLight
+                        : AppColors.actionButtonColorDark),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
                     width: 1.8,
-                    color: controller.getTimerColor(!mode!)!,
+                    color: mode!
+                        ? AppColors.actionButtonColorLight
+                        : AppColors.actionButtonColorDark,
                   ),
                 ),
               ),
@@ -69,22 +75,7 @@ class ActionsController extends StatelessWidget {
                 await showCustomDialog(
                   context,
                   isDismissible: true,
-                  dialog: Container(
-                    color: controller.getTimerColor(mode!),
-                    padding: const EdgeInsets.only(
-                        top: 17, bottom: 25, left: 14, right: 14),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Editar tempo de duração',
-                          style: TextStyle(
-                            color: controller.getTimerColor(!mode!),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  dialog: TimerTypeDialog(mode: mode),
                 );
               },
             ),

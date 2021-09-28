@@ -1,4 +1,5 @@
 import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
+import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -17,9 +18,25 @@ class AppActions extends StatelessWidget {
       left: 20,
       child: Row(
         children: [
-          Icon(Icons.info_outline, color: _color),
+          GestureDetector(
+            onTap: () async {
+              await Modular.to.pushNamed('/info');
+            },
+            child: Icon(Icons.info_outline,
+                color: mode!
+                    ? AppColors.mainTimerColorLight
+                    : AppColors.mainTimerColorDark),
+          ),
           SizedBox(width: 22),
-          Icon(Icons.settings, color: _color),
+          GestureDetector(
+            onTap: () {
+              // Modular.to.pushNamed('/settings');
+            },
+            child: Icon(Icons.settings,
+                color: mode!
+                    ? AppColors.mainTimerColorLight
+                    : AppColors.mainTimerColorDark),
+          ),
         ],
       ),
     );
