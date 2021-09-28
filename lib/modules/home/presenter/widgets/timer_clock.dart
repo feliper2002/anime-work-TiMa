@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +17,6 @@ class TimerClock extends StatefulWidget {
 
 class _TimerClockState extends State<TimerClock> {
   final controller = Modular.get<TimerController>();
-  final start = 0.toDouble();
-  final end = 2 * pi;
 
   @override
   void initState() {
@@ -40,6 +36,15 @@ class _TimerClockState extends State<TimerClock> {
                 fontSize: 26,
                 color: mainColor,
                 fontWeight: FontWeight.w900,
+                shadows: !widget.mode!
+                    ? [
+                        Shadow(
+                          color: Colors.grey,
+                          offset: Offset(3, 3),
+                          blurRadius: .5,
+                        ),
+                      ]
+                    : [],
               )),
           margin: const EdgeInsets.symmetric(vertical: 12),
         ),
@@ -49,8 +54,12 @@ class _TimerClockState extends State<TimerClock> {
         animation: true,
         animateFromLastPercent: true,
         circularStrokeCap: CircularStrokeCap.round,
-        progressColor: mainColor,
-        backgroundColor: AppColors.timerProgressBg,
+        progressColor: widget.mode!
+            ? AppColors.timerProgressBarLight
+            : AppColors.timerProgressBarDark,
+        backgroundColor: widget.mode!
+            ? AppColors.timerProgressBgLight
+            : AppColors.timerProgressBgDark,
         center: Observer(builder: (_) {
           return Text(
             "${controller.minutes!.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
@@ -58,6 +67,15 @@ class _TimerClockState extends State<TimerClock> {
               fontSize: 48,
               fontWeight: FontWeight.w700,
               color: mainColor,
+              shadows: !widget.mode!
+                  ? [
+                      Shadow(
+                        color: Colors.grey,
+                        offset: Offset(3, 3),
+                        blurRadius: .5,
+                      ),
+                    ]
+                  : [],
             ),
           );
         }),

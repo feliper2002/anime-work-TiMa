@@ -1,3 +1,4 @@
+import 'package:anime_work_time_management/shared/utils/app_images.dart';
 import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
 import 'package:mobx/mobx.dart';
 part 'home_controller.g.dart';
@@ -9,8 +10,8 @@ abstract class _HomeControllerBase with Store {
   String? backgroundImage(bool? switchMode) {
     // Changes home page [background image] by getting switchMode value
     if (switchMode == SwitchMode.day)
-      return 'assets/images/day_bg.jpg';
+      return AppImages.bgDay;
     else
-      return 'assets/images/night_bg.jpg';
+      return AppImages.bgNight2;
   }
 }

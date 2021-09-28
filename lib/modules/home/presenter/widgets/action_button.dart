@@ -1,4 +1,5 @@
 import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
+import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -43,12 +44,21 @@ class ActionButton extends StatelessWidget {
               color: mode!
                   ? Colors.grey[200]!.withOpacity(.2)
                   : Colors.blue[900]!.withOpacity(.2),
-              border: Border.all(color: _color!, width: 2),
+              border: Border.all(
+                  color: mode!
+                      ? AppColors.actionButtonColorLight
+                      : AppColors.actionButtonColorDark,
+                  width: 2),
             ),
             child: customIcon == null
                 ? Icon(controller.started! ? Icons.pause : Icons.play_arrow,
-                    color: _color)
-                : Icon(customIcon, color: _color),
+                    color: mode!
+                        ? AppColors.actionButtonColorLight
+                        : AppColors.actionButtonColorDark)
+                : Icon(customIcon,
+                    color: mode!
+                        ? AppColors.actionButtonColorLight
+                        : AppColors.actionButtonColorDark),
           ),
         ),
       );
