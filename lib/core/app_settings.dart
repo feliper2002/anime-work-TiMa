@@ -15,20 +15,32 @@ abstract class _SettingsControllerBase with Store {
   };
 
   _SettingsControllerBase() {
+    /// Initialize settings by calling [_readPreferences] function
     _startSettings();
   }
 
   _startSettings() async {
+    // It's called [every] single app initialization with the actual values locally stored
     await _readPreferences();
   }
 
   @action
   _readPreferences() async {
+    /// Get all [intances] from `SharedPreferences` and store them in a variable
     final _preferences = await SharedPreferences.getInstance();
+
+    /// Get all the respective [values] from preferences [instaces]
+    ///
+    /// Call _preferences with a method that receive as parameter the same [timer] map key name
+    ///
+    /// In case of [null] value, it return a value by {??} [nullable verification]
     final studyMinutes = _preferences.getInt('studyMinutes') ?? 50;
     final animeMinutes = _preferences.getInt('animeMinutes') ?? 25;
     final mode = _preferences.getBool('mode') ?? SwitchMode.day;
 
+    // timer map that contains the same [key name] as the [preferences instance names]
+    //
+    // the respective [key name] receive the [preferences instace value]
     timer = {
       'studyMinutes': studyMinutes,
       'animeMinutes': animeMinutes,
@@ -36,6 +48,11 @@ abstract class _SettingsControllerBase with Store {
     };
 
     print(timer);
+
+    /// Everytime this function is called, the [timer] map updates his respective values
+    /// based at setter functions with the [new values]
+    ///
+    /// That values are stored at [mobile local storage]
   }
 
   @action

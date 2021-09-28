@@ -7,6 +7,7 @@ class HomeController = _HomeControllerBase with _$HomeController;
 abstract class _HomeControllerBase with Store {
   @action
   String? backgroundImage(bool? switchMode) {
+    // Changes home page [background image] by getting switchMode value
     if (switchMode == SwitchMode.day)
       return 'assets/images/day_bg.jpg';
     else
