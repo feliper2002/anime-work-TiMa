@@ -66,6 +66,7 @@ abstract class _TimerControllerBase with Store {
 
   @action
   start() {
+    // Start [timer] countdown
     started = true;
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       time = minutes! * 60 - seconds!;
@@ -74,6 +75,7 @@ abstract class _TimerControllerBase with Store {
         time = time! - 1;
       }
       if (minutes == 0 && seconds == 0) {
+        // When [minutes] and [seconds] are zero, the [TimerType] value changes
         _changeTimerType();
         percent = 0;
       } else if (seconds == 0) {
@@ -81,6 +83,8 @@ abstract class _TimerControllerBase with Store {
         minutes = minutes! - 1;
       } else {
         if (percent < 1) {
+          // In case of [timer] countdown continues decreasing, the percent
+          // 'll increase based in a calculus by the total seconds missing
           percent += ((55 / time!) / 60);
         }
         seconds = seconds! - 1;

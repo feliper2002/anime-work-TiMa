@@ -11,6 +11,9 @@ Future<void> showCustomDialog(
   Widget? title,
   bool? scrollable,
 }) async {
+  // It creates a custom [dialog] that 'll follow the same pattern structure at all app screens
+  //
+  // This function return is differenciated by [platforms]: {Android} and {iOS}
   if (Platform.isAndroid) {
     return await showDialog(
       context: context!,
