@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:anime_work_time_management/core/app_settings.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
@@ -11,6 +12,8 @@ part 'timer_controller.g.dart';
 class TimerController = _TimerControllerBase with _$TimerController;
 
 abstract class _TimerControllerBase with Store {
+  final settings = Modular.get<SettingsController>();
+
   @observable
   bool? started = false;
 
@@ -30,10 +33,10 @@ abstract class _TimerControllerBase with Store {
   double percent = 0;
 
   @observable
-  TimerType? type = TimerType.work;
+  String? timeCountText;
 
   @observable
-  String? timeCountText;
+  int? type;
 
   @observable
   Timer? timer;
@@ -74,7 +77,7 @@ abstract class _TimerControllerBase with Store {
       if (time! > 0) {
         time = time! - 1;
       }
-      if (minutes == 0 && seconds == 0) {
+      if (minutes! == 0 && seconds == 0) {
         // When [minutes] and [seconds] are zero, the [TimerType] value changes
         _changeTimerType();
         percent = 0;
@@ -95,10 +98,11 @@ abstract class _TimerControllerBase with Store {
 
   _changeTimerType() {
     if (isWorking!) {
-      type = TimerType.watchAnime;
+      settings.setTimerType(TimerType.watchAnime);
       minutes = settings.timer['animeMinutes'];
     } else {
-      type = TimerType.work;
+      settings.setTimerType(TimerType.work);
+      type = settings.timerType;
       minutes = settings.timer['studyMinutes'];
     }
   }
@@ -106,10 +110,10 @@ abstract class _TimerControllerBase with Store {
   @action
   getStartTimerValues() {
     percent = 0;
-    if (type == TimerType.work) {
-      minutes = settings.timer['studyMinutes'];
+    if (isWorking!) {
+      minutes = settings.studyMinutes;
     } else
-      minutes = settings.timer['animeMinutes'];
+      minutes = settings.animeMinutes;
   }
 
   @action
@@ -117,8 +121,6 @@ abstract class _TimerControllerBase with Store {
     started = false;
     timer?.cancel();
   }
-
-  final settings = Modular.get<SettingsController>();
 
   @action
   restart() {
@@ -133,6 +135,6 @@ abstract class _TimerControllerBase with Store {
     }
   }
 
-  bool? get isWorking => type == TimerType.work;
-  bool? get isWatchingAnime => type == TimerType.watchAnime;
+  bool? get isWorking => settings.timerType == TimerType.work;
+  bool? get isWatchingAnime => settings.timerType == TimerType.watchAnime;
 }

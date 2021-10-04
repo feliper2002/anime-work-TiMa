@@ -12,6 +12,7 @@ abstract class _SettingsControllerBase with Store {
     'studyMinutes': 50,
     'animeMinutes': 25,
     'mode': SwitchMode.day,
+    'type': TimerType.work,
   };
 
   _SettingsControllerBase() {
@@ -37,6 +38,7 @@ abstract class _SettingsControllerBase with Store {
     final studyMinutes = _preferences.getInt('studyMinutes') ?? 50;
     final animeMinutes = _preferences.getInt('animeMinutes') ?? 25;
     final mode = _preferences.getBool('mode') ?? SwitchMode.day;
+    final type = _preferences.getInt('type') ?? TimerType.work;
 
     // timer map that contains the same [key name] as the [preferences instance names]
     //
@@ -45,6 +47,7 @@ abstract class _SettingsControllerBase with Store {
       'studyMinutes': studyMinutes,
       'animeMinutes': animeMinutes,
       'mode': mode,
+      'type': type,
     };
 
     print(timer);
@@ -63,8 +66,24 @@ abstract class _SettingsControllerBase with Store {
     await _readPreferences();
   }
 
+  @action
+  setTimerType(int? type) async {
+    final _preferences = await SharedPreferences.getInstance();
+    await _preferences.setInt('type', type!);
+    await _readPreferences();
+  }
+
   @computed
   bool? get switchMode => timer['mode'];
+
+  @computed
+  int? get timerType => timer['type'];
+
+  @computed
+  int? get studyMinutes => timer['studyMinutes'];
+
+  @computed
+  int? get animeMinutes => timer['animeMinutes'];
 
   @action
   setWatchAnimePrefs(int minutes) async {

@@ -108,21 +108,6 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
-  final _$typeAtom = Atom(name: '_TimerControllerBase.type');
-
-  @override
-  TimerType? get type {
-    _$typeAtom.reportRead();
-    return super.type;
-  }
-
-  @override
-  set type(TimerType? value) {
-    _$typeAtom.reportWrite(value, super.type, () {
-      super.type = value;
-    });
-  }
-
   final _$timeCountTextAtom = Atom(name: '_TimerControllerBase.timeCountText');
 
   @override
@@ -135,6 +120,21 @@ mixin _$TimerController on _TimerControllerBase, Store {
   set timeCountText(String? value) {
     _$timeCountTextAtom.reportWrite(value, super.timeCountText, () {
       super.timeCountText = value;
+    });
+  }
+
+  final _$typeAtom = Atom(name: '_TimerControllerBase.type');
+
+  @override
+  int? get type {
+    _$typeAtom.reportRead();
+    return super.type;
+  }
+
+  @override
+  set type(int? value) {
+    _$typeAtom.reportWrite(value, super.type, () {
+      super.type = value;
     });
   }
 
@@ -250,8 +250,8 @@ seconds: ${seconds},
 timeWork: ${timeWork},
 timeWatchAnime: ${timeWatchAnime},
 percent: ${percent},
-type: ${type},
 timeCountText: ${timeCountText},
+type: ${type},
 timer: ${timer},
 time: ${time},
 secInPercent: ${secInPercent},

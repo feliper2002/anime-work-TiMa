@@ -36,15 +36,6 @@ class _TimerClockState extends State<TimerClock> {
                 fontSize: 26,
                 color: mainColor,
                 fontWeight: FontWeight.w900,
-                shadows: !widget.mode!
-                    ? [
-                        Shadow(
-                          color: Colors.grey,
-                          offset: Offset(3, 3),
-                          blurRadius: .5,
-                        ),
-                      ]
-                    : [],
               )),
           margin: const EdgeInsets.symmetric(vertical: 12),
         ),
@@ -62,20 +53,11 @@ class _TimerClockState extends State<TimerClock> {
             : AppColors.timerProgressBgDark,
         center: Observer(builder: (_) {
           return Text(
-            "${controller.minutes!.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
+            "${controller.minutes.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
             style: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.w700,
               color: mainColor,
-              shadows: !widget.mode!
-                  ? [
-                      Shadow(
-                        color: Colors.grey,
-                        offset: Offset(3, 3),
-                        blurRadius: .5,
-                      ),
-                    ]
-                  : [],
             ),
           );
         }),
