@@ -36,15 +36,6 @@ class _TimerClockState extends State<TimerClock> {
                 fontSize: 26,
                 color: mainColor,
                 fontWeight: FontWeight.w900,
-                shadows: !widget.mode!
-                    ? [
-                        Shadow(
-                          color: Colors.grey,
-                          offset: Offset(3, 3),
-                          blurRadius: .5,
-                        ),
-                      ]
-                    : [],
               )),
           margin: const EdgeInsets.symmetric(vertical: 12),
         ),
@@ -67,15 +58,6 @@ class _TimerClockState extends State<TimerClock> {
               fontSize: 48,
               fontWeight: FontWeight.w700,
               color: mainColor,
-              shadows: !widget.mode!
-                  ? [
-                      Shadow(
-                        color: Colors.grey,
-                        offset: Offset(3, 3),
-                        blurRadius: .5,
-                      ),
-                    ]
-                  : [],
             ),
           );
         }),
