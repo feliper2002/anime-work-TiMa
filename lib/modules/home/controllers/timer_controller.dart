@@ -39,7 +39,7 @@ abstract class _TimerControllerBase with Store {
   int? type;
 
   @observable
-  Timer? timer;
+  Timer? _timer;
 
   @computed
   String? get timerHeader {
@@ -71,7 +71,7 @@ abstract class _TimerControllerBase with Store {
   start() {
     // Start [timer] countdown
     started = true;
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       time = minutes! * 60 - seconds!;
       secInPercent = (time! / 100);
       if (time! > 0) {
@@ -97,13 +97,11 @@ abstract class _TimerControllerBase with Store {
   }
 
   _changeTimerType() {
+    minutes = settings.minutes;
     if (isWorking!) {
       settings.setTimerType(TimerType.watchAnime);
-      minutes = settings.timer['animeMinutes'];
     } else {
       settings.setTimerType(TimerType.work);
-      type = settings.timerType;
-      minutes = settings.timer['studyMinutes'];
     }
   }
 
@@ -111,15 +109,27 @@ abstract class _TimerControllerBase with Store {
   getStartTimerValues() {
     percent = 0;
     if (isWorking!) {
-      minutes = settings.studyMinutes;
+      minutes = settings.minutes;
     } else
-      minutes = settings.animeMinutes;
+      minutes = settings.minutes;
+  }
+
+  @action
+  setTimerType(int? tipo) async {
+    type = tipo;
+    if (type == 0) {
+      minutes = 50;
+      await settings.setMinutes(minutes!);
+    } else {
+      minutes = 25;
+      await settings.setMinutes(minutes!);
+    }
   }
 
   @action
   stop() {
     started = false;
-    timer?.cancel();
+    _timer?.cancel();
   }
 
   @action

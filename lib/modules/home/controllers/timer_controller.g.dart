@@ -138,18 +138,18 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
-  final _$timerAtom = Atom(name: '_TimerControllerBase.timer');
+  final _$_timerAtom = Atom(name: '_TimerControllerBase._timer');
 
   @override
-  Timer? get timer {
-    _$timerAtom.reportRead();
-    return super.timer;
+  Timer? get _timer {
+    _$_timerAtom.reportRead();
+    return super._timer;
   }
 
   @override
-  set timer(Timer? value) {
-    _$timerAtom.reportWrite(value, super.timer, () {
-      super.timer = value;
+  set _timer(Timer? value) {
+    _$_timerAtom.reportWrite(value, super._timer, () {
+      super._timer = value;
     });
   }
 
@@ -181,6 +181,14 @@ mixin _$TimerController on _TimerControllerBase, Store {
     _$secInPercentAtom.reportWrite(value, super.secInPercent, () {
       super.secInPercent = value;
     });
+  }
+
+  final _$setTimerTypeAsyncAction =
+      AsyncAction('_TimerControllerBase.setTimerType');
+
+  @override
+  Future setTimerType(int? tipo) {
+    return _$setTimerTypeAsyncAction.run(() => super.setTimerType(tipo));
   }
 
   final _$_TimerControllerBaseActionController =
@@ -252,7 +260,6 @@ timeWatchAnime: ${timeWatchAnime},
 percent: ${percent},
 timeCountText: ${timeCountText},
 type: ${type},
-timer: ${timer},
 time: ${time},
 secInPercent: ${secInPercent},
 timerHeader: ${timerHeader}

@@ -23,20 +23,12 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
       (_$timerTypeComputed ??= Computed<int?>(() => super.timerType,
               name: '_SettingsControllerBase.timerType'))
           .value;
-  Computed<int?>? _$studyMinutesComputed;
+  Computed<int?>? _$minutesComputed;
 
   @override
-  int? get studyMinutes =>
-      (_$studyMinutesComputed ??= Computed<int?>(() => super.studyMinutes,
-              name: '_SettingsControllerBase.studyMinutes'))
-          .value;
-  Computed<int?>? _$animeMinutesComputed;
-
-  @override
-  int? get animeMinutes =>
-      (_$animeMinutesComputed ??= Computed<int?>(() => super.animeMinutes,
-              name: '_SettingsControllerBase.animeMinutes'))
-          .value;
+  int? get minutes => (_$minutesComputed ??= Computed<int?>(() => super.minutes,
+          name: '_SettingsControllerBase.minutes'))
+      .value;
 
   final _$timerAtom = Atom(name: '_SettingsControllerBase.timer');
 
@@ -86,6 +78,14 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
         .run(() => super.setWatchAnimePrefs(minutes));
   }
 
+  final _$setMinutesAsyncAction =
+      AsyncAction('_SettingsControllerBase.setMinutes');
+
+  @override
+  Future setMinutes(int minutes) {
+    return _$setMinutesAsyncAction.run(() => super.setMinutes(minutes));
+  }
+
   final _$setWorkStudyPrefsAsyncAction =
       AsyncAction('_SettingsControllerBase.setWorkStudyPrefs');
 
@@ -101,8 +101,7 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
 timer: ${timer},
 switchMode: ${switchMode},
 timerType: ${timerType},
-studyMinutes: ${studyMinutes},
-animeMinutes: ${animeMinutes}
+minutes: ${minutes}
     ''';
   }
 }
