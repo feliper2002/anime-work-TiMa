@@ -137,6 +137,7 @@ abstract class _TimerControllerBase with Store {
   @action
   restart() {
     percent = 0;
+    settings.startApplicationTimer();
     stop();
     if (isWorking!) {
       minutes = settings.timer['studyMinutes'];
