@@ -96,8 +96,8 @@ abstract class _SettingsControllerBase with Store {
   @action
   startApplicationTimer() async {
     final _preferences = await SharedPreferences.getInstance();
-    timer['studyMinutes'] = 50;
-    timer['animeMinutes'] = 25;
+    await setWorkStudyPrefs(50);
+    await setWatchAnimePrefs(25);
     if (_preferences.getInt('type') == 0) {
       await setMinutes(timer['studyMinutes']);
     } else {
