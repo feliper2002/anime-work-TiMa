@@ -53,7 +53,7 @@ class _TimerClockState extends State<TimerClock> {
             : AppColors.timerProgressBgDark,
         center: Observer(builder: (_) {
           return Text(
-            "${controller.minutes!.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
+            "${controller.minutes.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
             style: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.w700,
