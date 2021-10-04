@@ -29,6 +29,20 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
   int? get minutes => (_$minutesComputed ??= Computed<int?>(() => super.minutes,
           name: '_SettingsControllerBase.minutes'))
       .value;
+  Computed<int?>? _$studyMinutesComputed;
+
+  @override
+  int? get studyMinutes =>
+      (_$studyMinutesComputed ??= Computed<int?>(() => super.studyMinutes,
+              name: '_SettingsControllerBase.studyMinutes'))
+          .value;
+  Computed<int?>? _$animeMinutesComputed;
+
+  @override
+  int? get animeMinutes =>
+      (_$animeMinutesComputed ??= Computed<int?>(() => super.animeMinutes,
+              name: '_SettingsControllerBase.animeMinutes'))
+          .value;
 
   final _$timerAtom = Atom(name: '_SettingsControllerBase.timer');
 
@@ -69,6 +83,15 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
     return _$setTimerTypeAsyncAction.run(() => super.setTimerType(type));
   }
 
+  final _$startApplicationTimerAsyncAction =
+      AsyncAction('_SettingsControllerBase.startApplicationTimer');
+
+  @override
+  Future startApplicationTimer() {
+    return _$startApplicationTimerAsyncAction
+        .run(() => super.startApplicationTimer());
+  }
+
   final _$setWatchAnimePrefsAsyncAction =
       AsyncAction('_SettingsControllerBase.setWatchAnimePrefs');
 
@@ -86,6 +109,14 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
     return _$setMinutesAsyncAction.run(() => super.setMinutes(minutes));
   }
 
+  final _$decreaseMinutesAsyncAction =
+      AsyncAction('_SettingsControllerBase.decreaseMinutes');
+
+  @override
+  Future decreaseMinutes() {
+    return _$decreaseMinutesAsyncAction.run(() => super.decreaseMinutes());
+  }
+
   final _$setWorkStudyPrefsAsyncAction =
       AsyncAction('_SettingsControllerBase.setWorkStudyPrefs');
 
@@ -101,7 +132,9 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
 timer: ${timer},
 switchMode: ${switchMode},
 timerType: ${timerType},
-minutes: ${minutes}
+minutes: ${minutes},
+studyMinutes: ${studyMinutes},
+animeMinutes: ${animeMinutes}
     ''';
   }
 }

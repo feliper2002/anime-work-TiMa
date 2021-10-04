@@ -68,7 +68,7 @@ abstract class _TimerControllerBase with Store {
   double? secInPercent;
 
   @action
-  start() {
+  start() async {
     // Start [timer] countdown
     started = true;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -84,6 +84,7 @@ abstract class _TimerControllerBase with Store {
       } else if (seconds == 0) {
         seconds = 59;
         minutes = minutes! - 1;
+        settings.decreaseMinutes();
       } else {
         if (percent < 1) {
           // In case of [timer] countdown continues decreasing, the percent
@@ -107,11 +108,12 @@ abstract class _TimerControllerBase with Store {
 
   @action
   getStartTimerValues() {
+    settings.startApplicationTimer();
     percent = 0;
     if (isWorking!) {
-      minutes = settings.minutes;
+      minutes = settings.studyMinutes;
     } else
-      minutes = settings.minutes;
+      minutes = settings.animeMinutes;
   }
 
   @action

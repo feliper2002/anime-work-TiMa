@@ -87,6 +87,25 @@ abstract class _SettingsControllerBase with Store {
   @computed
   int? get minutes => timer['minutes'];
 
+  @computed
+  int? get studyMinutes => timer['studyMinutes'];
+
+  @computed
+  int? get animeMinutes => timer['animeMinutes'];
+
+  @action
+  startApplicationTimer() async {
+    final _preferences = await SharedPreferences.getInstance();
+    timer['studyMinutes'] = 50;
+    timer['animeMinutes'] = 25;
+    if (_preferences.getInt('type') == 0) {
+      await setMinutes(timer['studyMinutes']);
+    } else {
+      await setMinutes(timer['animeMinutes']);
+    }
+    await _readPreferences();
+  }
+
   @action
   setWatchAnimePrefs(int minutes) async {
     final _preferences = await SharedPreferences.getInstance();
@@ -98,6 +117,15 @@ abstract class _SettingsControllerBase with Store {
   setMinutes(int minutes) async {
     final _preferences = await SharedPreferences.getInstance();
     await _preferences.setInt('minutes', minutes);
+    await _readPreferences();
+  }
+
+  @action
+  decreaseMinutes() async {
+    final _preferences = await SharedPreferences.getInstance();
+    int atualMinutes = _preferences.getInt('minutes')!;
+    atualMinutes -= 1;
+    await _preferences.setInt('minutes', atualMinutes);
     await _readPreferences();
   }
 

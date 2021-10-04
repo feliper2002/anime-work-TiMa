@@ -183,6 +183,13 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
+  final _$startAsyncAction = AsyncAction('_TimerControllerBase.start');
+
+  @override
+  Future start() {
+    return _$startAsyncAction.run(() => super.start());
+  }
+
   final _$setTimerTypeAsyncAction =
       AsyncAction('_TimerControllerBase.setTimerType');
 
@@ -200,17 +207,6 @@ mixin _$TimerController on _TimerControllerBase, Store {
         name: '_TimerControllerBase.getTimerColor');
     try {
       return super.getTimerColor(mode);
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic start() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.start');
-    try {
-      return super.start();
     } finally {
       _$_TimerControllerBaseActionController.endAction(_$actionInfo);
     }
