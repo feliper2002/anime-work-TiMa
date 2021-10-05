@@ -67,6 +67,15 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
     return _$_readPreferencesAsyncAction.run(() => super._readPreferences());
   }
 
+  final _$startApplicationTimerAsyncAction =
+      AsyncAction('_SettingsControllerBase.startApplicationTimer');
+
+  @override
+  Future<int> startApplicationTimer() {
+    return _$startApplicationTimerAsyncAction
+        .run(() => super.startApplicationTimer());
+  }
+
   final _$setSwitchModeAsyncAction =
       AsyncAction('_SettingsControllerBase.setSwitchMode');
 
@@ -81,15 +90,6 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
   @override
   Future setTimerType(int? type) {
     return _$setTimerTypeAsyncAction.run(() => super.setTimerType(type));
-  }
-
-  final _$startApplicationTimerAsyncAction =
-      AsyncAction('_SettingsControllerBase.startApplicationTimer');
-
-  @override
-  Future startApplicationTimer() {
-    return _$startApplicationTimerAsyncAction
-        .run(() => super.startApplicationTimer());
   }
 
   final _$setWatchAnimePrefsAsyncAction =
@@ -109,14 +109,6 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
     return _$setMinutesAsyncAction.run(() => super.setMinutes(minutes));
   }
 
-  final _$decreaseMinutesAsyncAction =
-      AsyncAction('_SettingsControllerBase.decreaseMinutes');
-
-  @override
-  Future decreaseMinutes() {
-    return _$decreaseMinutesAsyncAction.run(() => super.decreaseMinutes());
-  }
-
   final _$setWorkStudyPrefsAsyncAction =
       AsyncAction('_SettingsControllerBase.setWorkStudyPrefs');
 
@@ -124,6 +116,14 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
   Future setWorkStudyPrefs(int minutes) {
     return _$setWorkStudyPrefsAsyncAction
         .run(() => super.setWorkStudyPrefs(minutes));
+  }
+
+  final _$decreaseMinutesAsyncAction =
+      AsyncAction('_SettingsControllerBase.decreaseMinutes');
+
+  @override
+  Future decreaseMinutes() {
+    return _$decreaseMinutesAsyncAction.run(() => super.decreaseMinutes());
   }
 
   @override

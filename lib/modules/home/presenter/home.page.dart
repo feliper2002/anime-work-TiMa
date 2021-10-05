@@ -34,8 +34,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: Image.asset(
-                            controller.backgroundImage(settings.switchMode)!)
-                        .image,
+                      controller.backgroundImage(settings.switchMode)!,
+                      errorBuilder: (_, widget, stack) {
+                        return Center(
+                            child:
+                                CircularProgressIndicator(color: Colors.blue));
+                      },
+                    ).image,
                   ),
                 ),
               );

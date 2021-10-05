@@ -23,18 +23,6 @@ abstract class _TimerControllerBase with Store {
   int? seconds = 0;
 
   @observable
-  int? timeWork;
-
-  @observable
-  int? timeWatchAnime;
-
-  @observable
-  double percent = 0;
-
-  @observable
-  String? timeCountText;
-
-  @observable
   int? type;
 
   @observable
@@ -45,7 +33,7 @@ abstract class _TimerControllerBase with Store {
 
   @computed
   String? get timerHeader {
-    if (isWorking!)
+    if (_isWorking!)
       return 'STUDY/WORK TIME';
     else
       return 'WATCH ANIME TIME';
@@ -64,44 +52,32 @@ abstract class _TimerControllerBase with Store {
   }
 
   @observable
-  int? time;
-
-  @observable
-  double? secInPercent;
+  int? _time;
 
   @action
   start() async {
     // Start [timer] countdown
     started = true;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      time = settings.minutes! * 60;
-      secInPercent = (time! / 100);
-      if (time! > 0) {
-        time = time! - 1;
+      _time = settings.minutes! * 60;
+      if (_time! > 0) {
+        _time = _time! - 1;
       }
       if (settings.minutes! == 0 && seconds == 0) {
         // When [minutes] and [seconds] are zero, the [TimerType] value changes
         _changeTimerType();
-        percent = 0;
       } else if (seconds == 0) {
         seconds = 59;
         minutes = minutes! - 1;
         settings.decreaseMinutes();
       } else {
-        if (percent < 1) {
-          // In case of [timer] countdown continues decreasing, the percent
-          // 'll increase based in a calculus by the total seconds missing
-          // percent += ((100 / time!) / 60);
-          // percent += (secInPercent! / time!);
-        }
         seconds = seconds! - 1;
       }
-      print(percent);
     });
   }
 
   _changeTimerType() {
-    if (isWorking!) {
+    if (_isWorking!) {
       settings.setTimerType(TimerType.watchAnime);
     } else {
       settings.setTimerType(TimerType.work);
@@ -111,32 +87,23 @@ abstract class _TimerControllerBase with Store {
     restart();
   }
 
-  @action
-  Future<void> getStartTimerValues() async {
-    await settings.startApplicationTimer();
-    percent = 0;
-    if (isWorking!) {
-      minutes = settings.timer['studyMinutes'];
-      await settings.setMinutes(minutes!);
-      seconds = 0;
+  int _verifyTimerType() {
+    if (_isWorking!) {
+      minutes = settings.studyMinutes;
     } else {
-      minutes = settings.timer['animeMinutes'];
-      await settings.setMinutes(minutes!);
-      seconds = 0;
+      minutes = settings.animeMinutes;
     }
+    return minutes!;
   }
 
   @action
-  setTimerType(int? tipo) async {
-    type = tipo;
-    if (type == 0) {
-      minutes = settings.timer['studyMinutes'];
-      await settings.setMinutes(minutes!);
-    } else {
-      minutes = settings.timer['animeMinutes'];
-      await settings.setMinutes(minutes!);
-    }
-    restart();
+  Future<int> getStartTimerValues() async {
+    seconds = 0;
+    await settings.startApplicationTimer();
+    minutes = _verifyTimerType();
+    await settings.setMinutes(minutes!);
+
+    return settings.minutes!;
   }
 
   @action
@@ -147,21 +114,13 @@ abstract class _TimerControllerBase with Store {
 
   @action
   restart() async {
-    percent = 0;
-    await settings.startApplicationTimer();
     stop();
+    await settings.startApplicationTimer();
+    minutes = _verifyTimerType();
+    await settings.setMinutes(minutes!);
     seconds = 0;
-    if (isWorking!) {
-      minutes = settings.timer['studyMinutes'];
-      await settings.setMinutes(minutes!);
-      seconds = 0;
-    } else {
-      minutes = settings.timer['animeMinutes'];
-      await settings.setMinutes(minutes!);
-      seconds = 0;
-    }
   }
 
-  bool? get isWorking => settings.timerType == TimerType.work;
-  bool? get isWatchingAnime => settings.timerType == TimerType.watchAnime;
+  bool? get _isWorking => settings.timerType == TimerType.work;
+  bool? get _isWatchingAnime => settings.timerType == TimerType.watchAnime;
 }
