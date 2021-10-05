@@ -1,5 +1,6 @@
 import 'package:anime_work_time_management/modules/home/presenter/widgets/type_selector_btn.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TimerTypeDialog extends StatelessWidget {
@@ -19,14 +20,17 @@ class TimerTypeDialog extends StatelessWidget {
         color: backgroundColor,
         borderRadius: BorderRadius.circular(20),
       ),
-      padding: const EdgeInsets.only(top: 17, bottom: 25, left: 14, right: 14),
+      padding: const EdgeInsets.only(top: 17, bottom: 25, left: 10, right: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'Editar tempo de duração',
+            'CHANGE TIMER TYPE',
             style: TextStyle(
               color: textColor,
+              fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 20),
