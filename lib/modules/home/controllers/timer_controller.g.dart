@@ -9,6 +9,13 @@ part of 'timer_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TimerController on _TimerControllerBase, Store {
+  Computed<int?>? _$timerMinutesComputed;
+
+  @override
+  int? get timerMinutes =>
+      (_$timerMinutesComputed ??= Computed<int?>(() => super.timerMinutes,
+              name: '_TimerControllerBase.timerMinutes'))
+          .value;
   Computed<String?>? _$timerHeaderComputed;
 
   @override
@@ -190,6 +197,15 @@ mixin _$TimerController on _TimerControllerBase, Store {
     return _$startAsyncAction.run(() => super.start());
   }
 
+  final _$getStartTimerValuesAsyncAction =
+      AsyncAction('_TimerControllerBase.getStartTimerValues');
+
+  @override
+  Future<void> getStartTimerValues() {
+    return _$getStartTimerValuesAsyncAction
+        .run(() => super.getStartTimerValues());
+  }
+
   final _$setTimerTypeAsyncAction =
       AsyncAction('_TimerControllerBase.setTimerType');
 
@@ -207,17 +223,6 @@ mixin _$TimerController on _TimerControllerBase, Store {
         name: '_TimerControllerBase.getTimerColor');
     try {
       return super.getTimerColor(mode);
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic getStartTimerValues() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.getStartTimerValues');
-    try {
-      return super.getStartTimerValues();
     } finally {
       _$_TimerControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -258,6 +263,7 @@ timeCountText: ${timeCountText},
 type: ${type},
 time: ${time},
 secInPercent: ${secInPercent},
+timerMinutes: ${timerMinutes},
 timerHeader: ${timerHeader}
     ''';
   }

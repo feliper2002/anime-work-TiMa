@@ -99,9 +99,9 @@ abstract class _SettingsControllerBase with Store {
     await setWorkStudyPrefs(50);
     await setWatchAnimePrefs(25);
     if (_preferences.getInt('type') == 0) {
-      await setMinutes(timer['studyMinutes']);
+      await setMinutes(_preferences.getInt('studyMinutes')!);
     } else {
-      await setMinutes(timer['animeMinutes']);
+      await setMinutes(_preferences.getInt('animeMinutes')!);
     }
     await _readPreferences();
   }

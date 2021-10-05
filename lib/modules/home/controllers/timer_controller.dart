@@ -42,6 +42,9 @@ abstract class _TimerControllerBase with Store {
   Timer? _timer;
 
   @computed
+  int? get timerMinutes => settings.minutes;
+
+  @computed
   String? get timerHeader {
     if (isWorking!)
       return 'STUDY/WORK TIME';
@@ -110,13 +113,9 @@ abstract class _TimerControllerBase with Store {
   }
 
   @action
-  getStartTimerValues() async {
+  Future<void> getStartTimerValues() async {
     await settings.startApplicationTimer();
     percent = 0;
-    if (isWorking!) {
-      minutes = settings.studyMinutes;
-    } else
-      minutes = settings.animeMinutes;
   }
 
   @action
