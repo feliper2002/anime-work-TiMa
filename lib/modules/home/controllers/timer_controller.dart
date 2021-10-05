@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:anime_work_time_management/core/app_settings.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
