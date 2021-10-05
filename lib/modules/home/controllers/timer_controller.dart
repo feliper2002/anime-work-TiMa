@@ -39,7 +39,10 @@ abstract class _TimerControllerBase with Store {
   int? type;
 
   @observable
-  Timer? timer;
+  Timer? _timer;
+
+  @computed
+  int? get timerMinutes => settings.minutes;
 
   @computed
   String? get timerHeader {
@@ -68,27 +71,29 @@ abstract class _TimerControllerBase with Store {
   double? secInPercent;
 
   @action
-  start() {
+  start() async {
     // Start [timer] countdown
     started = true;
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      time = minutes! * 60 - seconds!;
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      time = settings.minutes! * 60;
       secInPercent = (time! / 100);
       if (time! > 0) {
         time = time! - 1;
       }
-      if (minutes! == 0 && seconds == 0) {
+      if (settings.minutes! == 0 && seconds == 0) {
         // When [minutes] and [seconds] are zero, the [TimerType] value changes
         _changeTimerType();
         percent = 0;
       } else if (seconds == 0) {
         seconds = 59;
         minutes = minutes! - 1;
+        settings.decreaseMinutes();
       } else {
         if (percent < 1) {
           // In case of [timer] countdown continues decreasing, the percent
           // 'll increase based in a calculus by the total seconds missing
-          percent += ((55 / time!) / 60);
+          // percent += ((100 / time!) / 60);
+          // percent += (secInPercent! / time!);
         }
         seconds = seconds! - 1;
       }
@@ -99,38 +104,61 @@ abstract class _TimerControllerBase with Store {
   _changeTimerType() {
     if (isWorking!) {
       settings.setTimerType(TimerType.watchAnime);
-      minutes = settings.timer['animeMinutes'];
     } else {
       settings.setTimerType(TimerType.work);
-      type = settings.timerType;
+    }
+    minutes = settings.minutes;
+    settings.setMinutes(minutes!);
+    restart();
+  }
+
+  @action
+  Future<void> getStartTimerValues() async {
+    await settings.startApplicationTimer();
+    percent = 0;
+    if (isWorking!) {
       minutes = settings.timer['studyMinutes'];
+      await settings.setMinutes(minutes!);
+      seconds = 0;
+    } else {
+      minutes = settings.timer['animeMinutes'];
+      await settings.setMinutes(minutes!);
+      seconds = 0;
     }
   }
 
   @action
-  getStartTimerValues() {
-    percent = 0;
-    if (isWorking!) {
-      minutes = settings.studyMinutes;
-    } else
-      minutes = settings.animeMinutes;
+  setTimerType(int? tipo) async {
+    type = tipo;
+    if (type == 0) {
+      minutes = settings.timer['studyMinutes'];
+      await settings.setMinutes(minutes!);
+    } else {
+      minutes = settings.timer['animeMinutes'];
+      await settings.setMinutes(minutes!);
+    }
+    restart();
   }
 
   @action
   stop() {
     started = false;
-    timer?.cancel();
+    _timer?.cancel();
   }
 
   @action
-  restart() {
+  restart() async {
     percent = 0;
+    await settings.startApplicationTimer();
     stop();
+    seconds = 0;
     if (isWorking!) {
       minutes = settings.timer['studyMinutes'];
+      await settings.setMinutes(minutes!);
       seconds = 0;
     } else {
       minutes = settings.timer['animeMinutes'];
+      await settings.setMinutes(minutes!);
       seconds = 0;
     }
   }

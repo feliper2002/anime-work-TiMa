@@ -1,4 +1,5 @@
 import 'package:anime_work_time_management/core/app_settings.dart';
+import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class TypeSelectorBtn extends StatelessWidget {
       : super(key: key);
 
   final controller = Modular.get<SettingsController>();
+  final timer = Modular.get<TimerController>();
 
   bool? isSelected() {
     if (controller.timerType == type) {
@@ -50,8 +52,10 @@ class TypeSelectorBtn extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Observer(builder: (_) {
       return GestureDetector(
-        onTap: () {
-          controller.setTimerType(type);
+        onTap: () async {
+          await controller.setTimerType(type);
+          await timer.setTimerType(type);
+          Modular.to.pop();
         },
         child: Container(
           height: size.width * .3,

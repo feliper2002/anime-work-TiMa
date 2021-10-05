@@ -23,6 +23,12 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
       (_$timerTypeComputed ??= Computed<int?>(() => super.timerType,
               name: '_SettingsControllerBase.timerType'))
           .value;
+  Computed<int?>? _$minutesComputed;
+
+  @override
+  int? get minutes => (_$minutesComputed ??= Computed<int?>(() => super.minutes,
+          name: '_SettingsControllerBase.minutes'))
+      .value;
   Computed<int?>? _$studyMinutesComputed;
 
   @override
@@ -77,6 +83,15 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
     return _$setTimerTypeAsyncAction.run(() => super.setTimerType(type));
   }
 
+  final _$startApplicationTimerAsyncAction =
+      AsyncAction('_SettingsControllerBase.startApplicationTimer');
+
+  @override
+  Future startApplicationTimer() {
+    return _$startApplicationTimerAsyncAction
+        .run(() => super.startApplicationTimer());
+  }
+
   final _$setWatchAnimePrefsAsyncAction =
       AsyncAction('_SettingsControllerBase.setWatchAnimePrefs');
 
@@ -84,6 +99,22 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
   Future setWatchAnimePrefs(int minutes) {
     return _$setWatchAnimePrefsAsyncAction
         .run(() => super.setWatchAnimePrefs(minutes));
+  }
+
+  final _$setMinutesAsyncAction =
+      AsyncAction('_SettingsControllerBase.setMinutes');
+
+  @override
+  Future setMinutes(int minutes) {
+    return _$setMinutesAsyncAction.run(() => super.setMinutes(minutes));
+  }
+
+  final _$decreaseMinutesAsyncAction =
+      AsyncAction('_SettingsControllerBase.decreaseMinutes');
+
+  @override
+  Future decreaseMinutes() {
+    return _$decreaseMinutesAsyncAction.run(() => super.decreaseMinutes());
   }
 
   final _$setWorkStudyPrefsAsyncAction =
@@ -101,6 +132,7 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
 timer: ${timer},
 switchMode: ${switchMode},
 timerType: ${timerType},
+minutes: ${minutes},
 studyMinutes: ${studyMinutes},
 animeMinutes: ${animeMinutes}
     ''';
