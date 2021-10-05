@@ -116,6 +116,15 @@ abstract class _TimerControllerBase with Store {
   Future<void> getStartTimerValues() async {
     await settings.startApplicationTimer();
     percent = 0;
+    if (isWorking!) {
+      minutes = settings.timer['studyMinutes'];
+      await settings.setMinutes(minutes!);
+      seconds = 0;
+    } else {
+      minutes = settings.timer['animeMinutes'];
+      await settings.setMinutes(minutes!);
+      seconds = 0;
+    }
   }
 
   @action
@@ -138,15 +147,18 @@ abstract class _TimerControllerBase with Store {
   }
 
   @action
-  restart() {
+  restart() async {
     percent = 0;
-    settings.startApplicationTimer();
+    await settings.startApplicationTimer();
     stop();
+    seconds = 0;
     if (isWorking!) {
       minutes = settings.timer['studyMinutes'];
+      await settings.setMinutes(minutes!);
       seconds = 0;
     } else {
       minutes = settings.timer['animeMinutes'];
+      await settings.setMinutes(minutes!);
       seconds = 0;
     }
   }

@@ -20,14 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ModularState<HomePage, HomeController> {
   final settings = Modular.get<SettingsController>();
 
-  Map<String, dynamic>? timer;
-
-  @override
-  void initState() {
-    timer = settings.timer;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
