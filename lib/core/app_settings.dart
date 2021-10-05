@@ -63,20 +63,21 @@ abstract class _SettingsControllerBase with Store {
   }
 
   @action
-  setSwitchMode() async {
+  Future<int> startApplicationTimer() async {
     final _preferences = await SharedPreferences.getInstance();
-    timer['mode'] = !timer['mode'];
-    await _preferences.setBool('mode', timer['mode']);
+    await setWorkStudyPrefs(50);
+    await setWatchAnimePrefs(25);
+    if (_preferences.getInt('type') == 0) {
+      await setMinutes(_preferences.getInt('studyMinutes')!);
+    } else {
+      await setMinutes(_preferences.getInt('animeMinutes')!);
+    }
     await _readPreferences();
+
+    return minutes!;
   }
 
-  @action
-  setTimerType(int? type) async {
-    final _preferences = await SharedPreferences.getInstance();
-    await _preferences.setInt('type', type!);
-    timer['type'] = _preferences.getInt('type');
-    await _readPreferences();
-  }
+  /// Timer prefs [GETTERS] //////////////////////////////////////
 
   @computed
   bool? get switchMode => timer['mode'];
@@ -93,16 +94,21 @@ abstract class _SettingsControllerBase with Store {
   @computed
   int? get animeMinutes => timer['animeMinutes'];
 
+///////////////////////////////////////////////////////////////////////
+
   @action
-  startApplicationTimer() async {
+  setSwitchMode() async {
     final _preferences = await SharedPreferences.getInstance();
-    await setWorkStudyPrefs(50);
-    await setWatchAnimePrefs(25);
-    if (_preferences.getInt('type') == 0) {
-      await setMinutes(_preferences.getInt('studyMinutes')!);
-    } else {
-      await setMinutes(_preferences.getInt('animeMinutes')!);
-    }
+    timer['mode'] = !timer['mode'];
+    await _preferences.setBool('mode', timer['mode']);
+    await _readPreferences();
+  }
+
+  @action
+  setTimerType(int? type) async {
+    final _preferences = await SharedPreferences.getInstance();
+    await _preferences.setInt('type', type!);
+    timer['type'] = _preferences.getInt('type');
     await _readPreferences();
   }
 
@@ -121,18 +127,18 @@ abstract class _SettingsControllerBase with Store {
   }
 
   @action
+  setWorkStudyPrefs(int minutes) async {
+    final _preferences = await SharedPreferences.getInstance();
+    await _preferences.setInt('studyMinutes', minutes);
+    await _readPreferences();
+  }
+
+  @action
   decreaseMinutes() async {
     final _preferences = await SharedPreferences.getInstance();
     int atualMinutes = _preferences.getInt('minutes')!;
     atualMinutes -= 1;
     await _preferences.setInt('minutes', atualMinutes);
-    await _readPreferences();
-  }
-
-  @action
-  setWorkStudyPrefs(int minutes) async {
-    final _preferences = await SharedPreferences.getInstance();
-    await _preferences.setInt('studyMinutes', minutes);
     await _readPreferences();
   }
 }

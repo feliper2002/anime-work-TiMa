@@ -54,7 +54,7 @@ class TypeSelectorBtn extends StatelessWidget {
       return GestureDetector(
         onTap: () async {
           await controller.setTimerType(type);
-          await timer.setTimerType(type);
+          await timer.restart();
           Modular.to.pop();
         },
         child: Container(

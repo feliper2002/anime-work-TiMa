@@ -69,67 +69,6 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
-  final _$timeWorkAtom = Atom(name: '_TimerControllerBase.timeWork');
-
-  @override
-  int? get timeWork {
-    _$timeWorkAtom.reportRead();
-    return super.timeWork;
-  }
-
-  @override
-  set timeWork(int? value) {
-    _$timeWorkAtom.reportWrite(value, super.timeWork, () {
-      super.timeWork = value;
-    });
-  }
-
-  final _$timeWatchAnimeAtom =
-      Atom(name: '_TimerControllerBase.timeWatchAnime');
-
-  @override
-  int? get timeWatchAnime {
-    _$timeWatchAnimeAtom.reportRead();
-    return super.timeWatchAnime;
-  }
-
-  @override
-  set timeWatchAnime(int? value) {
-    _$timeWatchAnimeAtom.reportWrite(value, super.timeWatchAnime, () {
-      super.timeWatchAnime = value;
-    });
-  }
-
-  final _$percentAtom = Atom(name: '_TimerControllerBase.percent');
-
-  @override
-  double get percent {
-    _$percentAtom.reportRead();
-    return super.percent;
-  }
-
-  @override
-  set percent(double value) {
-    _$percentAtom.reportWrite(value, super.percent, () {
-      super.percent = value;
-    });
-  }
-
-  final _$timeCountTextAtom = Atom(name: '_TimerControllerBase.timeCountText');
-
-  @override
-  String? get timeCountText {
-    _$timeCountTextAtom.reportRead();
-    return super.timeCountText;
-  }
-
-  @override
-  set timeCountText(String? value) {
-    _$timeCountTextAtom.reportWrite(value, super.timeCountText, () {
-      super.timeCountText = value;
-    });
-  }
-
   final _$typeAtom = Atom(name: '_TimerControllerBase.type');
 
   @override
@@ -160,33 +99,18 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
-  final _$timeAtom = Atom(name: '_TimerControllerBase.time');
+  final _$_timeAtom = Atom(name: '_TimerControllerBase._time');
 
   @override
-  int? get time {
-    _$timeAtom.reportRead();
-    return super.time;
+  int? get _time {
+    _$_timeAtom.reportRead();
+    return super._time;
   }
 
   @override
-  set time(int? value) {
-    _$timeAtom.reportWrite(value, super.time, () {
-      super.time = value;
-    });
-  }
-
-  final _$secInPercentAtom = Atom(name: '_TimerControllerBase.secInPercent');
-
-  @override
-  double? get secInPercent {
-    _$secInPercentAtom.reportRead();
-    return super.secInPercent;
-  }
-
-  @override
-  set secInPercent(double? value) {
-    _$secInPercentAtom.reportWrite(value, super.secInPercent, () {
-      super.secInPercent = value;
+  set _time(int? value) {
+    _$_timeAtom.reportWrite(value, super._time, () {
+      super._time = value;
     });
   }
 
@@ -201,17 +125,16 @@ mixin _$TimerController on _TimerControllerBase, Store {
       AsyncAction('_TimerControllerBase.getStartTimerValues');
 
   @override
-  Future<void> getStartTimerValues() {
+  Future<int> getStartTimerValues() {
     return _$getStartTimerValuesAsyncAction
         .run(() => super.getStartTimerValues());
   }
 
-  final _$setTimerTypeAsyncAction =
-      AsyncAction('_TimerControllerBase.setTimerType');
+  final _$restartAsyncAction = AsyncAction('_TimerControllerBase.restart');
 
   @override
-  Future setTimerType(int? tipo) {
-    return _$setTimerTypeAsyncAction.run(() => super.setTimerType(tipo));
+  Future restart() {
+    return _$restartAsyncAction.run(() => super.restart());
   }
 
   final _$_TimerControllerBaseActionController =
@@ -240,29 +163,12 @@ mixin _$TimerController on _TimerControllerBase, Store {
   }
 
   @override
-  dynamic restart() {
-    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
-        name: '_TimerControllerBase.restart');
-    try {
-      return super.restart();
-    } finally {
-      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 started: ${started},
 minutes: ${minutes},
 seconds: ${seconds},
-timeWork: ${timeWork},
-timeWatchAnime: ${timeWatchAnime},
-percent: ${percent},
-timeCountText: ${timeCountText},
 type: ${type},
-time: ${time},
-secInPercent: ${secInPercent},
 timerMinutes: ${timerMinutes},
 timerHeader: ${timerHeader}
     ''';
