@@ -40,7 +40,9 @@ class ActionsController extends StatelessWidget {
                         size,
                         mode,
                         customIcon: Icons.replay_outlined,
-                        onClick: controller.restart,
+                        onClick: () async {
+                          await controller.restart();
+                        },
                         enable: !controller.started!,
                       );
                     }),

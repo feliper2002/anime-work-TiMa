@@ -11,6 +11,7 @@ abstract class _SettingsControllerBase with Store {
   Map<String, dynamic> timer = {
     'studyMinutes': 50,
     'animeMinutes': 25,
+    'minutes': 50,
     'mode': SwitchMode.day,
     'type': TimerType.work,
   };
@@ -39,6 +40,8 @@ abstract class _SettingsControllerBase with Store {
     final animeMinutes = _preferences.getInt('animeMinutes') ?? 25;
     final mode = _preferences.getBool('mode') ?? SwitchMode.day;
     final type = _preferences.getInt('type') ?? TimerType.work;
+    final minutes = _preferences.getInt('minutes') ??
+        (type == 0 ? studyMinutes : animeMinutes);
 
     // timer map that contains the same [key name] as the [preferences instance names]
     //
@@ -46,6 +49,7 @@ abstract class _SettingsControllerBase with Store {
     timer = {
       'studyMinutes': studyMinutes,
       'animeMinutes': animeMinutes,
+      'minutes': minutes,
       'mode': mode,
       'type': type,
     };
@@ -70,6 +74,7 @@ abstract class _SettingsControllerBase with Store {
   setTimerType(int? type) async {
     final _preferences = await SharedPreferences.getInstance();
     await _preferences.setInt('type', type!);
+    timer['type'] = _preferences.getInt('type');
     await _readPreferences();
   }
 
@@ -80,15 +85,47 @@ abstract class _SettingsControllerBase with Store {
   int? get timerType => timer['type'];
 
   @computed
+  int? get minutes => timer['minutes'];
+
+  @computed
   int? get studyMinutes => timer['studyMinutes'];
 
   @computed
   int? get animeMinutes => timer['animeMinutes'];
 
   @action
+  startApplicationTimer() async {
+    final _preferences = await SharedPreferences.getInstance();
+    await setWorkStudyPrefs(50);
+    await setWatchAnimePrefs(25);
+    if (_preferences.getInt('type') == 0) {
+      await setMinutes(_preferences.getInt('studyMinutes')!);
+    } else {
+      await setMinutes(_preferences.getInt('animeMinutes')!);
+    }
+    await _readPreferences();
+  }
+
+  @action
   setWatchAnimePrefs(int minutes) async {
     final _preferences = await SharedPreferences.getInstance();
     await _preferences.setInt('animeMinutes', minutes);
+    await _readPreferences();
+  }
+
+  @action
+  setMinutes(int minutes) async {
+    final _preferences = await SharedPreferences.getInstance();
+    await _preferences.setInt('minutes', minutes);
+    await _readPreferences();
+  }
+
+  @action
+  decreaseMinutes() async {
+    final _preferences = await SharedPreferences.getInstance();
+    int atualMinutes = _preferences.getInt('minutes')!;
+    atualMinutes -= 1;
+    await _preferences.setInt('minutes', atualMinutes);
     await _readPreferences();
   }
 
