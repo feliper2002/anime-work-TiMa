@@ -16,47 +16,40 @@ class _TimerClockState extends State<TimerClock> {
   final controller = Modular.get<TimerController>();
 
   @override
+  void initState() {
+    controller.getStartTimerValues();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final mainColor = controller.getTimerColor(widget.mode!);
-    return FutureBuilder(
-      future: controller.getStartTimerValues(),
-      builder: (_, AsyncSnapshot<int> snapshot) {
-        if (snapshot.hasData) {
-          return Observer(builder: (_) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: Text(controller.timerHeader!,
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: mainColor,
-                        fontWeight: FontWeight.w900,
-                      )),
-                  margin: const EdgeInsets.symmetric(vertical: 12),
-                ),
-                SizedBox(height: 20),
-                Observer(builder: (_) {
-                  return Text(
-                    "${controller.timerMinutes.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
-                    style: TextStyle(
-                      fontSize: 60,
-                      fontWeight: FontWeight.w700,
-                      color: mainColor,
-                    ),
-                  );
-                }),
-              ],
+    return Observer(builder: (_) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            child: Text(controller.timerHeader!,
+                style: TextStyle(
+                  fontSize: 26,
+                  color: mainColor,
+                  fontWeight: FontWeight.w900,
+                )),
+            margin: const EdgeInsets.symmetric(vertical: 12),
+          ),
+          SizedBox(height: 20),
+          Observer(builder: (_) {
+            return Text(
+              "${controller.timerMinutes.toString().padLeft(2, '0')}:${controller.seconds!.toString().padLeft(2, '0')}",
+              style: TextStyle(
+                fontSize: 60,
+                fontWeight: FontWeight.w700,
+                color: mainColor,
+              ),
             );
-          });
-        } else {
-          return Center(
-            child: CircularProgressIndicator(
-              color: mainColor,
-            ),
-          );
-        }
-      },
-    );
+          }),
+        ],
+      );
+    });
   }
 }

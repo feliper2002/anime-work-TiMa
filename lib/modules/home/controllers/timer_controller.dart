@@ -47,22 +47,11 @@ abstract class _TimerControllerBase with Store {
       return AppColors.mainTimerColorDark;
   }
 
-  setStarted(bool? value) {
-    started = value;
-  }
-
-  @observable
-  int? _time;
-
   @action
   start() async {
     // Start [timer] countdown
     started = true;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      _time = settings.minutes! * 60;
-      if (_time! > 0) {
-        _time = _time! - 1;
-      }
       if (settings.minutes! == 0 && seconds == 0) {
         // When [minutes] and [seconds] are zero, the [TimerType] value changes
         _changeTimerType();
@@ -82,13 +71,11 @@ abstract class _TimerControllerBase with Store {
     } else {
       settings.setTimerType(TimerType.work);
     }
-    minutes = settings.minutes;
-    settings.setMinutes(minutes!);
     restart();
   }
 
   int _verifyTimerType() {
-    if (_isWorking!) {
+    if (!_isWatchingAnime!) {
       minutes = settings.studyMinutes;
     } else {
       minutes = settings.animeMinutes;

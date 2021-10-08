@@ -99,21 +99,6 @@ mixin _$TimerController on _TimerControllerBase, Store {
     });
   }
 
-  final _$_timeAtom = Atom(name: '_TimerControllerBase._time');
-
-  @override
-  int? get _time {
-    _$_timeAtom.reportRead();
-    return super._time;
-  }
-
-  @override
-  set _time(int? value) {
-    _$_timeAtom.reportWrite(value, super._time, () {
-      super._time = value;
-    });
-  }
-
   final _$startAsyncAction = AsyncAction('_TimerControllerBase.start');
 
   @override
