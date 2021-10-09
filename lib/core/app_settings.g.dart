@@ -126,6 +126,14 @@ mixin _$SettingsController on _SettingsControllerBase, Store {
     return _$decreaseMinutesAsyncAction.run(() => super.decreaseMinutes());
   }
 
+  final _$resetPreferencesAsyncAction =
+      AsyncAction('_SettingsControllerBase.resetPreferences');
+
+  @override
+  Future resetPreferences() {
+    return _$resetPreferencesAsyncAction.run(() => super.resetPreferences());
+  }
+
   @override
   String toString() {
     return '''

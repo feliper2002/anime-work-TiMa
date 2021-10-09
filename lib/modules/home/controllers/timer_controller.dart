@@ -74,23 +74,20 @@ abstract class _TimerControllerBase with Store {
     restart();
   }
 
-  int _verifyTimerType() {
+  _verifyTimerType() async {
     if (!_isWatchingAnime!) {
       minutes = settings.studyMinutes;
     } else {
       minutes = settings.animeMinutes;
     }
-    return minutes!;
+    await settings.setMinutes(minutes!);
   }
 
   @action
-  Future<int> getStartTimerValues() async {
+  Future<void> getStartTimerValues() async {
     seconds = 0;
     await settings.startApplicationTimer();
-    minutes = _verifyTimerType();
-    await settings.setMinutes(minutes!);
-
-    return settings.minutes!;
+    await _verifyTimerType();
   }
 
   @action
@@ -103,8 +100,7 @@ abstract class _TimerControllerBase with Store {
   restart() async {
     stop();
     await settings.startApplicationTimer();
-    minutes = _verifyTimerType();
-    await settings.setMinutes(minutes!);
+    await _verifyTimerType();
     seconds = 0;
   }
 

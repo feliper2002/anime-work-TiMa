@@ -110,7 +110,7 @@ mixin _$TimerController on _TimerControllerBase, Store {
       AsyncAction('_TimerControllerBase.getStartTimerValues');
 
   @override
-  Future<int> getStartTimerValues() {
+  Future<void> getStartTimerValues() {
     return _$getStartTimerValuesAsyncAction
         .run(() => super.getStartTimerValues());
   }
