@@ -23,16 +23,18 @@ class AppActions extends StatelessWidget {
               await Modular.to.pushNamed('/info');
             },
             child: Icon(Icons.info_outline,
+                size: 26,
                 color: mode!
                     ? AppColors.mainTimerColorLight
                     : AppColors.mainTimerColorDark),
           ),
           SizedBox(width: 22),
           GestureDetector(
-            onTap: () {
-              // Modular.to.pushNamed('/settings');
+            onTap: () async {
+              await Modular.to.pushNamed('/settings');
             },
             child: Icon(Icons.settings,
+                size: 26,
                 color: mode!
                     ? AppColors.mainTimerColorLight
                     : AppColors.mainTimerColorDark),

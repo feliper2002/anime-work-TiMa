@@ -141,4 +141,11 @@ abstract class _SettingsControllerBase with Store {
     await _preferences.setInt('minutes', atualMinutes);
     await _readPreferences();
   }
+
+  @action
+  resetPreferences() async {
+    final _preferences = await SharedPreferences.getInstance();
+    await _preferences.clear();
+    await _readPreferences();
+  }
 }
