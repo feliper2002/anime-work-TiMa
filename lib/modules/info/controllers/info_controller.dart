@@ -11,8 +11,8 @@ abstract class _InfoControllerBase with Store {
       'route': '/info/credits',
     },
     {
-      'name': 'Licenses',
-      'route': '/info/licenses',
+      'name': 'Contacts',
+      'route': '/info/contacts',
     },
     {
       'name': 'About app',
