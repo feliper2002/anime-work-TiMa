@@ -11,12 +11,19 @@ abstract class _InfoControllerBase with Store {
       'route': '/info/credits',
     },
     {
-      'name': 'Contacts',
-      'route': '/info/contacts',
-    },
-    {
       'name': 'About app',
       'route': '/info/about',
+    },
+  ];
+
+  List<Map<String, dynamic>> credits = [
+    {
+      'title': 'App prototype',
+      'name': 'Felipe Ribeiro',
+    },
+    {
+      'title': 'Background art & drawing',
+      'name': 'Victoria Emilly',
     },
   ];
 }
