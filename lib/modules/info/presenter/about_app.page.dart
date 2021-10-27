@@ -33,7 +33,8 @@ class AboutAppPage extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'This app was developed for studies interests about the used technology.\n\nDeveloped by: Felipe Ribeiro\n\nAnime Work - Time Management (TiMa) is an app that helps you to divide a time for your work and studies and the necessary time to watch an anime episode.',
+              'This app was developed for studies of interest at used technology.\n\nDeveloped by: Felipe Ribeiro\n\nAnime Work - Time Management (TiMa) is an app that helps you split the time of your work and studies and the time needed to watch an anime episode. Making it easier for you to focus more on what you´re doing and be able to maintain productivity followed by a good and fun rest.',
+              textAlign: TextAlign.justify,
               style: TextStyle(
                 fontSize: 16,
                 color: mainColor,
@@ -46,30 +47,25 @@ class AboutAppPage extends StatelessWidget {
                 for (var media in controller.links)
                   Container(
                     child: Expanded(
-                      child: GestureDetector(
-                        onTap: () async {
-                          await controller.launchURL(media['link']);
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  colorFilter: ColorFilter.mode(
-                                      mainColor, BlendMode.dstIn),
-                                  image: Image.asset(media['icon_path']).image,
-                                ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                colorFilter: ColorFilter.mode(
+                                    mainColor, BlendMode.dstIn),
+                                image: Image.asset(media['icon_path']).image,
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            Text(
-                              media['title'],
-                              style: TextStyle(color: mainColor, fontSize: 18),
-                            ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            media['title'],
+                            style: TextStyle(color: mainColor, fontSize: 18),
+                          ),
+                        ],
                       ),
                     ),
                   ),

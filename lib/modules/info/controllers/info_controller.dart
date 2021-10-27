@@ -1,5 +1,4 @@
 import 'package:mobx/mobx.dart';
-import 'package:url_launcher/url_launcher.dart';
 part 'info_controller.g.dart';
 
 class InfoController = _InfoControllerBase with _$InfoController;
@@ -30,17 +29,14 @@ abstract class _InfoControllerBase with Store {
 
   List<Map<String, dynamic>> links = [
     {
-      'title': 'GitHub',
+      'title': 'feliper2002',
       'icon_path': 'assets/images/github-logo.png',
       'link': 'https://github.com/feliper2002',
     },
     {
-      'title': 'Twitter',
+      'title': '@feliper_dev',
       'icon_path': 'assets/images/twitter-logo.png',
       'link': 'https://twitter.com/feliper_dev',
     },
   ];
-
-  launchURL(String? url) async =>
-      await canLaunch(url!) ? await launch(url) : throw 'Could not launch $url';
 }
