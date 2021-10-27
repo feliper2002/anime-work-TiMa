@@ -16,8 +16,6 @@ class ActionButton extends StatelessWidget {
 
   final controller = Modular.get<TimerController>();
 
-  Color? get _color => controller.getTimerColor(!mode!);
-
   @override
   Widget build(BuildContext context) {
     final buttonSize = size!.width * .16;
