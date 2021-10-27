@@ -26,4 +26,17 @@ abstract class _InfoControllerBase with Store {
       'name': 'Victoria Emilly',
     },
   ];
+
+  List<Map<String, dynamic>> links = [
+    {
+      'title': 'feliper2002',
+      'icon_path': 'assets/images/github-logo.png',
+      'link': 'https://github.com/feliper2002',
+    },
+    {
+      'title': '@feliper_dev',
+      'icon_path': 'assets/images/twitter-logo.png',
+      'link': 'https://twitter.com/feliper_dev',
+    },
+  ];
 }
