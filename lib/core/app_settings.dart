@@ -65,8 +65,8 @@ abstract class _SettingsControllerBase with Store {
   @action
   Future<int> startApplicationTimer() async {
     final _preferences = await SharedPreferences.getInstance();
-    await setWorkStudyPrefs(50);
-    await setWatchAnimePrefs(25);
+    await setWorkStudyPrefs(studyMinutes!);
+    await setWatchAnimePrefs(animeMinutes!);
     if (_preferences.getInt('type') == 0) {
       await setMinutes(_preferences.getInt('studyMinutes')!);
     } else {
@@ -93,6 +93,16 @@ abstract class _SettingsControllerBase with Store {
 
   @computed
   int? get animeMinutes => timer['animeMinutes'];
+
+///////////////////////////////////////////////////////////////////////
+
+  @observable
+  int? newMinutes;
+
+  @action
+  setNewMinutes(int? value) {
+    newMinutes = value;
+  }
 
 ///////////////////////////////////////////////////////////////////////
 
