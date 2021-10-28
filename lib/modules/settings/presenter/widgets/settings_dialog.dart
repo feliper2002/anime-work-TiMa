@@ -1,5 +1,8 @@
+import 'package:anime_work_time_management/core/app_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 
 class SettingsDialog extends StatelessWidget {
   final String? title;
@@ -7,6 +10,8 @@ class SettingsDialog extends StatelessWidget {
   final Color? textColor;
 
   SettingsDialog({this.title, this.color, this.textColor});
+
+  final settings = Modular.get<SettingsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +34,7 @@ class SettingsDialog extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           TextFormField(
+            style: TextStyle(color: textColor),
             decoration: InputDecoration(
               labelText: 'Minutes',
               labelStyle: TextStyle(color: textColor),
@@ -36,30 +42,46 @@ class SettingsDialog extends StatelessWidget {
                 borderSide: BorderSide(color: textColor!),
               ),
             ),
+            keyboardType: TextInputType.number,
+            onChanged: (minutes) {
+              if (minutes.isNotEmpty) {
+                int? minInt = NumberFormat().parse(minutes).toInt();
+                settings.setNewMinutes(minInt);
+              }
+            },
           ),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              OutlinedButton(
-                onPressed: () async {},
-                child: Text(
-                  'Confirmar',
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 16,
+              Observer(builder: (_) {
+                return OutlinedButton(
+                  onPressed: () async {
+                    if (title == "Study/Work time:") {
+                      await settings.setWorkStudyPrefs(settings.newMinutes!);
+                    } else if (title == "Watch anime time:") {
+                      await settings.setWatchAnimePrefs(settings.newMinutes!);
+                    }
+                    Modular.to.pop();
+                  },
+                  child: Text(
+                    'Confirmar',
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                style: ButtonStyle(
-                    alignment: Alignment.centerLeft,
-                    padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(horizontal: 12)),
-                    side: MaterialStateProperty.all(
-                        BorderSide(width: 2, color: textColor!)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ))),
-              ),
+                  style: ButtonStyle(
+                      alignment: Alignment.centerLeft,
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.symmetric(horizontal: 12)),
+                      side: MaterialStateProperty.all(
+                          BorderSide(width: 2, color: textColor!)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ))),
+                );
+              }),
               OutlinedButton(
                 onPressed: () {
                   Modular.to.pop();
