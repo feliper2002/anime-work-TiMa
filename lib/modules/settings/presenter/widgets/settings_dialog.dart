@@ -1,4 +1,5 @@
 import 'package:anime_work_time_management/core/app_settings.dart';
+import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -8,8 +9,9 @@ class SettingsDialog extends StatelessWidget {
   final String? title;
   final Color? color;
   final Color? textColor;
+  final int? type;
 
-  SettingsDialog({this.title, this.color, this.textColor});
+  SettingsDialog({this.title, this.color, this.textColor, this.type});
 
   final settings = Modular.get<SettingsController>();
 
@@ -33,23 +35,31 @@ class SettingsDialog extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          TextFormField(
-            style: TextStyle(color: textColor),
-            decoration: InputDecoration(
-              labelText: 'Minutes',
-              labelStyle: TextStyle(color: textColor),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: textColor!),
+          Observer(builder: (_) {
+            return TextFormField(
+              style: TextStyle(color: textColor),
+              initialValue: type == TimerType.work
+                  ? settings.studyMinutes.toString()
+                  : settings.animeMinutes.toString(),
+              decoration: InputDecoration(
+                labelText: 'Minutes',
+                labelStyle: TextStyle(color: textColor),
+                errorText: settings.changedNewMinutes!
+                    ? settings.validateNewMinutes()
+                    : null,
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: textColor!),
+                ),
               ),
-            ),
-            keyboardType: TextInputType.number,
-            onChanged: (minutes) {
-              if (minutes.isNotEmpty) {
-                int? minInt = NumberFormat().parse(minutes).toInt();
-                settings.setNewMinutes(minInt);
-              }
-            },
-          ),
+              keyboardType: TextInputType.number,
+              onChanged: (minutes) {
+                if (minutes.isNotEmpty) {
+                  int? minInt = NumberFormat().parse(minutes).toInt();
+                  settings.setNewMinutes(minInt);
+                }
+              },
+            );
+          }),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -57,11 +67,12 @@ class SettingsDialog extends StatelessWidget {
               Observer(builder: (_) {
                 return OutlinedButton(
                   onPressed: () async {
-                    if (title == "Study/Work time:") {
+                    if (type == TimerType.work) {
                       await settings.setWorkStudyPrefs(settings.newMinutes!);
-                    } else if (title == "Watch anime time:") {
+                    } else if (type == TimerType.watchAnime) {
                       await settings.setWatchAnimePrefs(settings.newMinutes!);
                     }
+                    settings.setChangedNewMinutes(false);
                     Modular.to.pop();
                   },
                   child: Text(

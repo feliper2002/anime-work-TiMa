@@ -7,8 +7,9 @@ class SettingsButton extends StatelessWidget {
   final String? text;
   final int? minutes;
   final bool? mode;
+  final int? type;
 
-  SettingsButton(this.text, this.mode, {this.minutes});
+  SettingsButton(this.text, this.mode, {this.minutes, this.type});
   Color? get backgroundColor =>
       (mode! ? Colors.white : AppColors.mainTimerColorDark);
   Color? get textColor =>
@@ -23,7 +24,10 @@ class SettingsButton extends StatelessWidget {
         onPressed: () async {
           await showCustomDialog(context,
               dialog: SettingsDialog(
-                  title: text, color: backgroundColor, textColor: textColor));
+                  title: text,
+                  color: backgroundColor,
+                  textColor: textColor,
+                  type: type));
         },
         child: Row(
           children: [
