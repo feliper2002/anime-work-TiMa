@@ -65,8 +65,8 @@ abstract class _SettingsControllerBase with Store {
   @action
   Future<int> startApplicationTimer() async {
     final _preferences = await SharedPreferences.getInstance();
-    await setWorkStudyPrefs(50);
-    await setWatchAnimePrefs(25);
+    await setWorkStudyPrefs(studyMinutes!);
+    await setWatchAnimePrefs(animeMinutes!);
     if (_preferences.getInt('type') == 0) {
       await setMinutes(_preferences.getInt('studyMinutes')!);
     } else {
@@ -93,6 +93,39 @@ abstract class _SettingsControllerBase with Store {
 
   @computed
   int? get animeMinutes => timer['animeMinutes'];
+
+///////////////////////////////////////////////////////////////////////
+
+  @observable
+  int? newMinutes;
+
+  @observable
+  bool? changedNewMinutes = false;
+
+  @action
+  setChangedNewMinutes(value) {
+    changedNewMinutes = value;
+  }
+
+  @action
+  setNewMinutes(int? value) {
+    changedNewMinutes = true;
+    newMinutes = value;
+  }
+
+  String? validateNewMinutes() {
+    if (newMinutes != null) {
+      if (newMinutes! <= 0 || newMinutes! >= 240) {
+        return "Max minutes allowed is 240 minutes!";
+      }
+      return null;
+    }
+    return "null";
+  }
+
+  bool? validateForm() {
+    return validateNewMinutes() == null;
+  }
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -139,6 +172,13 @@ abstract class _SettingsControllerBase with Store {
     int atualMinutes = _preferences.getInt('minutes')!;
     atualMinutes -= 1;
     await _preferences.setInt('minutes', atualMinutes);
+    await _readPreferences();
+  }
+
+  @action
+  resetPreferences() async {
+    final _preferences = await SharedPreferences.getInstance();
+    await _preferences.clear();
     await _readPreferences();
   }
 }

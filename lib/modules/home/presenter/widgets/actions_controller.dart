@@ -34,7 +34,20 @@ class ActionsController extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ActionButton(size, mode),
+                    Observer(builder: (_) {
+                      return ActionButton(
+                        size,
+                        mode,
+                        started: controller.started,
+                        onClick: () async {
+                          if (!controller.started!) {
+                            await controller.start();
+                          } else {
+                            controller.stop();
+                          }
+                        },
+                      );
+                    }),
                     Observer(builder: (_) {
                       return ActionButton(
                         size,
