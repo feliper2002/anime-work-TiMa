@@ -8,9 +8,6 @@ class AppActions extends StatelessWidget {
 
   AppActions(this.mode);
 
-  final controller = Modular.get<TimerController>();
-
-  Color get _color => controller.getTimerColor(mode!)!;
   @override
   Widget build(BuildContext context) {
     return Positioned(
