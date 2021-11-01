@@ -22,7 +22,7 @@ abstract class _InfoControllerBase with Store {
       'name': 'Felipe Ribeiro',
     },
     {
-      'title': 'Background art & drawing',
+      'title': 'Background art & drawing (Dark mode)',
       'name': 'Victoria Emilly',
     },
   ];

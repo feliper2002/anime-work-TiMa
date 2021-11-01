@@ -1,18 +1,12 @@
-import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class ResetButton extends StatelessWidget {
-  final bool? mode;
   final Function? onTap;
 
-  ResetButton(this.mode, {this.onTap});
-  Color? get backgroundColor =>
-      (mode! ? Colors.white : AppColors.mainTimerColorDark);
-  Color? get textColor =>
-      (mode! ? AppColors.mainTimerColorLight : Colors.white);
+  ResetButton({this.onTap});
   @override
   Widget build(BuildContext context) {
-    Color? mainColor = (mode! ? AppColors.mainTimerColorLight : Colors.white);
+    Color? mainColor = Colors.red;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
