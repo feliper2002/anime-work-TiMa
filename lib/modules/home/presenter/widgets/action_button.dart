@@ -7,14 +7,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 class ActionButton extends StatelessWidget {
   final Size? size;
   final bool? mode;
+  final bool? started;
   final Function? onClick;
   final IconData? customIcon;
   final bool? enable;
 
   ActionButton(this.size, this.mode,
-      {this.onClick, this.customIcon, this.enable = true});
-
-  final controller = Modular.get<TimerController>();
+      {this.onClick, this.customIcon, this.enable = true, this.started});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +23,7 @@ class ActionButton extends StatelessWidget {
       return Visibility(
         visible: enable!,
         child: GestureDetector(
-          onTap: onClick == null
-              ? () {
-                  if (!controller.started!) {
-                    controller.start();
-                  } else {
-                    controller.stop();
-                  }
-                }
-              : onClick as void Function(),
+          onTap: onClick as void Function(),
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 6),
             height: buttonSize,
@@ -49,7 +40,7 @@ class ActionButton extends StatelessWidget {
                   width: 2),
             ),
             child: customIcon == null
-                ? Icon(controller.started! ? Icons.pause : Icons.play_arrow,
+                ? Icon(started! ? Icons.pause : Icons.play_arrow,
                     color: mode!
                         ? AppColors.actionButtonColorLight
                         : AppColors.actionButtonColorDark)

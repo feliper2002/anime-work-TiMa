@@ -99,9 +99,32 @@ abstract class _SettingsControllerBase with Store {
   @observable
   int? newMinutes;
 
+  @observable
+  bool? changedNewMinutes = false;
+
+  @action
+  setChangedNewMinutes(value) {
+    changedNewMinutes = value;
+  }
+
   @action
   setNewMinutes(int? value) {
+    changedNewMinutes = true;
     newMinutes = value;
+  }
+
+  String? validateNewMinutes() {
+    if (newMinutes != null) {
+      if (newMinutes! <= 0 || newMinutes! >= 240) {
+        return "Max minutes allowed is 240 minutes!";
+      }
+      return null;
+    }
+    return "null";
+  }
+
+  bool? validateForm() {
+    return validateNewMinutes() == null;
   }
 
 ///////////////////////////////////////////////////////////////////////
