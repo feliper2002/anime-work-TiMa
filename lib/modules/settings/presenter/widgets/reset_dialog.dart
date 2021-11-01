@@ -1,17 +1,13 @@
 import 'package:anime_work_time_management/core/app_settings.dart';
-import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 
-class SettingsDialog extends StatelessWidget {
-  final String? title;
+class ResetDialog extends StatelessWidget {
   final Color? color;
   final Color? textColor;
-  final int? type;
 
-  SettingsDialog({this.title, this.color, this.textColor, this.type});
+  ResetDialog(this.color, this.textColor);
 
   final settings = Modular.get<SettingsController>();
 
@@ -27,7 +23,7 @@ class SettingsDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            '$title Settings',
+            'Reset app preferences?',
             style: TextStyle(
               color: textColor,
               fontSize: 20,
@@ -35,44 +31,22 @@ class SettingsDialog extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          Observer(builder: (_) {
-            return TextFormField(
-              style: TextStyle(color: textColor),
-              initialValue: type == TimerType.work
-                  ? settings.studyMinutes.toString()
-                  : settings.animeMinutes.toString(),
-              decoration: InputDecoration(
-                labelText: 'Minutes',
-                labelStyle: TextStyle(color: textColor),
-                errorText: settings.changedNewMinutes!
-                    ? settings.validateNewMinutes()
-                    : null,
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: textColor!),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              onChanged: (minutes) {
-                if (minutes.isNotEmpty) {
-                  int? minInt = NumberFormat().parse(minutes).toInt();
-                  settings.setNewMinutes(minInt);
-                }
-              },
-            );
-          }),
-          const SizedBox(height: 16),
+          Text(
+            'This action will clear all app preferences.',
+            style: TextStyle(
+              color: textColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+          const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Observer(builder: (_) {
                 return OutlinedButton(
                   onPressed: () async {
-                    if (type == TimerType.work) {
-                      await settings.setWorkStudyPrefs(settings.newMinutes!);
-                    } else if (type == TimerType.watchAnime) {
-                      await settings.setWatchAnimePrefs(settings.newMinutes!);
-                    }
-                    settings.setChangedNewMinutes(false);
+                    await settings.resetPreferences();
                     Modular.to.pop();
                   },
                   child: Text(
