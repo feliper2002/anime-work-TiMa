@@ -58,7 +58,7 @@ class SettingsPage extends StatelessWidget {
               }),
               const SizedBox(height: 40),
               Observer(builder: (_) {
-                return ResetButton(mode, onTap: () async {
+                return ResetButton(onTap: () async {
                   await settings.resetPreferences();
                 });
               }),
