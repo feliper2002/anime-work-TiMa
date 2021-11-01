@@ -1,6 +1,8 @@
 import 'package:anime_work_time_management/core/app_settings.dart';
 import 'package:anime_work_time_management/modules/settings/presenter/widgets/reset_btn.dart';
+import 'package:anime_work_time_management/modules/settings/presenter/widgets/reset_dialog.dart';
 import 'package:anime_work_time_management/modules/settings/presenter/widgets/settings_btn.dart';
+import 'package:anime_work_time_management/shared/functions/show_dialog.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
 import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +61,8 @@ class SettingsPage extends StatelessWidget {
               const SizedBox(height: 40),
               Observer(builder: (_) {
                 return ResetButton(onTap: () async {
-                  await settings.resetPreferences();
+                  await showCustomDialog(context,
+                      dialog: ResetDialog(bgColor, mainColor));
                 });
               }),
             ],
