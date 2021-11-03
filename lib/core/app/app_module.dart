@@ -3,7 +3,6 @@ import 'package:anime_work_time_management/core/app_settings.dart';
 import 'package:anime_work_time_management/modules/home/controllers/home_controller.dart';
 import 'package:anime_work_time_management/modules/home/controllers/timer_controller.dart';
 import 'package:anime_work_time_management/modules/home/home_module.dart';
-import 'package:anime_work_time_management/modules/info/controllers/info_controller.dart';
 import 'package:anime_work_time_management/modules/info/info_module.dart';
 import 'package:anime_work_time_management/modules/settings/settings_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,7 +13,6 @@ class AppModule extends Module {
     Bind<HomeController>((i) => HomeController()),
     Bind<TimerController>((i) => TimerController()),
     Bind<SettingsController>((i) => SettingsController()),
-    Bind<InfoController>((i) => InfoController()),
   ];
 
   @override

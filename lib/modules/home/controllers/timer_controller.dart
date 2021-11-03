@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:anime_work_time_management/core/app_settings.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
-import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
+import 'package:anime_work_time_management/shared/utils/classes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
