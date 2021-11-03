@@ -6,7 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class CreditsPage extends StatelessWidget {
   final settings = Modular.get<SettingsController>();
-  final controller = Modular.get<InfoController>();
+  final controller = InfoController();
 
   @override
   Widget build(BuildContext context) {

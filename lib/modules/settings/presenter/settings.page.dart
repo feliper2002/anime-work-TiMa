@@ -4,7 +4,7 @@ import 'package:anime_work_time_management/modules/settings/presenter/widgets/re
 import 'package:anime_work_time_management/modules/settings/presenter/widgets/settings_btn.dart';
 import 'package:anime_work_time_management/shared/functions/show_dialog.dart';
 import 'package:anime_work_time_management/shared/theme/colors.dart';
-import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
+import 'package:anime_work_time_management/shared/utils/classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';

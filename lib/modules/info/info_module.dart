@@ -1,4 +1,3 @@
-import 'package:anime_work_time_management/modules/info/controllers/info_controller.dart';
 import 'package:anime_work_time_management/modules/info/presenter/about_app.page.dart';
 import 'package:anime_work_time_management/modules/info/presenter/info.page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -6,9 +5,7 @@ import 'presenter/credits.page.dart';
 
 class InfoModule extends Module {
   @override
-  final List<Bind> binds = [
-    Bind<InfoController>((i) => InfoController()),
-  ];
+  final List<Bind> binds = [];
 
   @override
   final List<ModularRoute> routes = [

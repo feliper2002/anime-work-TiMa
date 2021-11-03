@@ -1,4 +1,4 @@
-import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
+import 'package:anime_work_time_management/shared/utils/classes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:mobx/mobx.dart';
