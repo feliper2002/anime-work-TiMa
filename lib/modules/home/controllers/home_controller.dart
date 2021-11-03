@@ -1,5 +1,5 @@
 import 'package:anime_work_time_management/shared/utils/app_images.dart';
-import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
+import 'package:anime_work_time_management/shared/utils/classes.dart';
 import 'package:mobx/mobx.dart';
 part 'home_controller.g.dart';
 

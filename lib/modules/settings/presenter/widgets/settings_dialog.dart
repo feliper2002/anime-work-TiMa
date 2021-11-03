@@ -1,5 +1,5 @@
 import 'package:anime_work_time_management/core/app_settings.dart';
-import 'package:anime_work_time_management/shared/utils/enum_classes.dart';
+import 'package:anime_work_time_management/shared/utils/classes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
