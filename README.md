@@ -5,6 +5,18 @@
 Um projeto de `Gerenciamento de tempo` feito com Flutter  💙
 
 ## Sobre o projeto
+
+🌴 O que pôde ser aprendido
+- [x] Armazenamento local com `Shared_Preferences`
+- [x] Utilização de `Timer` para contagem regressiva
+- [x] Variação de temas (`Light mode` & `Dark mode`)
+- [x] Reatividade com `MobX`
+
+✅ Todo
+
+- [ ] Barra de progresso de contagem regressiva
+- [ ] `Assets` de sons para o timer
+
 ---
 
 # Contribuições

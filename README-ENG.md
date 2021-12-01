@@ -5,11 +5,23 @@
 A `Time Management` project made with Flutter 💙
 
 ## About
+
+🌴 What  I've learned
+- [x] Local storage with `Shared_Preferences`
+- [x] `Timer` using for regressive counting
+- [x] Theme variation (`Light mode` & `Dark mode`)
+- [x] Reactivity with `MobX`
+
+✅ Todo
+
+- [ ] Regressive counting progress bar
+- [ ] Sounds `Assets` for timer
+
 ---
 
 # Contributions
 
-Contribuições fazem com que a comunidade open source seja um lugar incrível para aprender, inspirar e criar. Todas contribuições são extremamente apreciadas
+Contributions makes for the open source commutinity be such an amazing place to learn, inspire and create. All contributions are extremely appreciated
 
 - `Fork` the project
 ```bash
